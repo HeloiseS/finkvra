@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "finkvra"
+version = "0.1.0"
+description = "Active Learning prototype for the Fink VRA using day 1 and day N models"
+authors = [
+    { name = "H. F. Stevance", email = "hfstevance@gmail.com" }
+]
+readme = "README.md"
+#license = { text = "MIT" }
+dependencies = [
+    "pandas>=1.5",
+    "numpy>=1.23",
+    "scikit-learn>=1.2",
+    "matplotlib",
+    "plotly",
+    "tqdm"
+]
+requires-python = ">=3.8"
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "black",
+    "ipython",
+    "jupyter"
+]
+
+[tool.setuptools.packages.find]
+where = ["finkvra"]
