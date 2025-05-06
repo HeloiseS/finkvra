@@ -31,3 +31,6 @@ dev = [
 
 [tool.setuptools.packages.find]
 where = ["finkvra"]
+
+[tool.setuptools.package-data]
+"finkvra.data" = ["*.csv"]

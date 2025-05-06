@@ -1,0 +1,18 @@
+day1:
+  X_train: "X_train_day1_duck1000.csv"
+  y_train: "y_train_day1_duck1000.csv"
+  X_val: "X_val_day1_duck1000.csv"
+  y_val: "y_val_day1_duck1000.csv"
+
+dayn:
+  X_train: "X_train_dayN_duck1000.csv"
+  y_train: "y_train_dayN_duck1000.csv"
+  X_val: "X_val_dayN_duck1000.csv"
+  y_val: "y_val_dayN_duck1000.csv"
+
+# Experiment setup
+strategy: "entropy"
+batch_size: 10
+n_iterations: 30
+random_seed: 42
+prefix: null
