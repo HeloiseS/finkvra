@@ -20,7 +20,7 @@ def duck_day1_data():
     y_train_real, y_train_gal = preprocess_labels(y_train_raw)
     y_val_real, y_val_gal = preprocess_labels(y_val_raw)
 
-    return X_train, y_train_real, y_train_gal, X_val, y_val_real, y_val_gal
+    return X_train, y_train_real, y_train_gal, X_val, y_val_raw,y_val_real, y_val_gal
 
 @pytest.fixture
 def duck_dayn_data():
@@ -32,11 +32,11 @@ def duck_dayn_data():
     y_train_real, y_train_gal = preprocess_labels(y_train_raw)
     y_val_real, y_val_gal = preprocess_labels(y_val_raw)
 
-    return X_train, y_train_real, y_train_gal, X_val, y_val_real, y_val_gal
+    return X_train, y_train_real, y_train_gal, X_val, y_val_raw,y_val_real, y_val_gal
 
 
 def test_queryal_smoke_dayn(tmp_path, duck_dayn_data):
-    X_train, y_train_real, y_train_gal, X_val, y_val_real, y_val_gal = duck_dayn_data
+    X_train, y_train_real, y_train_gal, X_val, y_val_raw,y_val_real, y_val_gal = duck_dayn_data
 
     learner = QueryAL(
         X_pool=X_train,
@@ -48,7 +48,8 @@ def test_queryal_smoke_dayn(tmp_path, duck_dayn_data):
         random_state=123,
     )
 
-    model_real, model_gal = learner.run(X_val, y_val_real, y_val_gal, verbose=False)
+    model_real, model_gal = learner.run(X_val, y_val_raw,
+                                        y_val_real, y_val_gal, verbose=False)
 
     assert len(learner.metric_history) == 2
     assert len(learner.selected_ids_log) == 2
@@ -70,7 +71,7 @@ def test_queryal_smoke_dayn(tmp_path, duck_dayn_data):
         assert os.path.exists(path)
 
 def test_queryal_smoke_day1(tmp_path, duck_day1_data):
-    X_train, y_train_real, y_train_gal, X_val, y_val_real, y_val_gal = duck_day1_data
+    X_train, y_train_real, y_train_gal, X_val, y_val_raw,y_val_real, y_val_gal = duck_day1_data
 
     learner = QueryAL(
         X_pool=X_train,
@@ -82,7 +83,7 @@ def test_queryal_smoke_day1(tmp_path, duck_day1_data):
         random_state=123,
     )
 
-    model_real, model_gal = learner.run(X_val, y_val_real, y_val_gal, verbose=False)
+    model_real, model_gal = learner.run(X_val, y_val_raw,y_val_real, y_val_gal, verbose=False)
 
     # Simple assertions
     assert len(learner.metric_history) == 2
@@ -104,7 +105,7 @@ def test_queryal_smoke_day1(tmp_path, duck_day1_data):
         assert os.path.exists(path)
 
 def test_queryal_early_stop_warning(duck_day1_data):
-    X_train, y_train_real, y_train_gal, X_val, y_val_real, y_val_gal = duck_day1_data
+    X_train, y_train_real, y_train_gal, X_val, y_val_raw,y_val_real, y_val_gal= duck_day1_data
 
     # This should deplete the pool (1000 rows total)
     learner = QueryAL(
@@ -118,7 +119,7 @@ def test_queryal_early_stop_warning(duck_day1_data):
     )
 
     with pytest.warns(RuntimeWarning, match="No more unlabeled samples"):
-        learner.run(X_val, y_val_real, y_val_gal, verbose=False)
+        learner.run(X_val, y_val_raw, y_val_real, y_val_gal, verbose=False)
 
     # Assert that only two iterations ran (3rd would require >1000 samples)
     assert len(learner.metric_history) == 1

@@ -51,7 +51,7 @@ def run_experiment(dataset, config):
     )
 
     print(f"Running experiment on {dataset.upper()} data...")
-    learner.run(X_val, y_val_real, y_val_gal)
+    learner.run(X_val, y_val_raw,y_val_real, y_val_gal)
     learner.export_logs(config.get("prefix"))
 
 def main():

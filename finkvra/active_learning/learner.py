@@ -104,6 +104,7 @@ class QueryAL:
 
     def run(self,
             X_val: pd.DataFrame,
+            y_val: pd.Series,
             y_real_val: pd.Series,
             y_gal_val: pd.Series,
             verbose: bool =True,
@@ -152,12 +153,14 @@ class QueryAL:
                                                        ).fit(X_train, y_train_real)
 
             # Evaluate custom metric on the validation set
+
+
             recall_curve, auc_val = al_metrics.recall_at_k_auc(
-                y_real_val,
-                y_gal_val,
+                y_val["type"],
                 real_model.predict_proba(X_val)[:, 1],
                 gal_model.predict_proba(X_val)[:, 1],
             )
+
             self.metric_history.append(auc_val)
 
             # Next batch to "label" or select.

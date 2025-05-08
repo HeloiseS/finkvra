@@ -3,46 +3,64 @@ import pandas as pd
 from sklearn.metrics import auc
 
 
-def recall_at_k_auc(y_real_true, y_gal_true, y_real_proba, y_gal_proba, max_k=None):
+def rank_function(real_pred, gal_pred, fudge_factor=0.5, max_rank=10):
     """
-    Computes recall@k and area under recall curve (normalized) for 'real and not galactic' samples.
+    Computes a VRA-style ranking score from real and galactic probabilities.
+    Higher = better (closer to (1,0)).
+    """
+    distance = np.sqrt((1 - real_pred) ** 2 + (fudge_factor * gal_pred) ** 2)
+    max_distance = np.sqrt(1 + fudge_factor ** 2)
+    return (max_distance - distance) * max_rank / max_distance
+
+
+def fast_recall_curve(labels, target_class='good'):
+    """
+    Vectorized recall@k curve for a specific class label.
 
     Parameters:
-    - y_real_true: array-like, true binary labels for 'real'
-    - y_gal_true: array-like, true binary labels for 'galactic'
-    - y_real_proba: array-like, predicted probability for 'real'
-    - y_gal_proba: array-like, predicted probability for 'galactic'
-    - max_k: optional int, maximum rank K (default: len(y))
+        labels (pd.Series): categorical labels sorted by predicted rank (high → low)
+        target_class (str): label to count as relevant (e.g. 'good')
 
     Returns:
-    - recall_at_k: list of recall@k values
-    - auc_recall: float, normalized area under the recall curve
+        recall_at_k (np.ndarray): recall@k from k=1 to N
     """
-    y_real_true = np.array(y_real_true)
-    y_gal_true = np.array(y_gal_true)
-    y_real_proba = np.array(y_real_proba)
-    y_gal_proba = np.array(y_gal_proba)
+    is_relevant = (labels == target_class).to_numpy()
+    total_relevant = is_relevant.sum()
 
-    dist = np.sqrt((1 - y_real_proba) ** 2 + y_gal_proba ** 2)
-    sorted_idx = np.argsort(dist)
+    if total_relevant == 0:
+        return np.zeros(len(labels))
 
-    is_relevant = (y_real_true == 1) & (y_gal_true == 0)
-    n_relevant = is_relevant.sum()
+    cum_relevant = np.cumsum(is_relevant)
+    return cum_relevant / total_relevant
 
-    if n_relevant == 0:
-        return [0.0] * (max_k or len(y_real_true)), 0.0
 
-    if max_k is None:
-        max_k = len(y_real_true)
+def recall_at_k_auc(y_type_true,
+                    y_real_proba,
+                    y_gal_proba, fudge_factor=0.5, max_rank=10):
+    """
+    Compute recall@k curve and AUC for a VRA-style rank ordering.
 
-    recall_at_k = []
-    for k in range(1, max_k + 1):
-        top_k_idx = sorted_idx[:k]
-        relevant_found = is_relevant[top_k_idx].sum()
-        recall_at_k.append(relevant_found / n_relevant)
+    Parameters:
+        y_type_true (pd.Series): categorical labels (e.g. 'good', 'galactic', etc.)
+        y_real_proba (np.ndarray): predicted probability of 'real'
+        y_gal_proba (np.ndarray): predicted probability of 'galactic'
+        fudge_factor (float): scalar applied to galactic axis in rank
+        max_rank (int): scaling factor for output rank values (not needed for ordering)
 
-    auc_recall = auc(np.arange(1, max_k + 1), recall_at_k) / max_k
-    return recall_at_k, auc_recall
+    Returns:
+        recall_at_k (list of float)
+        auc_recall (float)
+    """
+    ranks = rank_function(y_real_proba, y_gal_proba, fudge_factor, max_rank)
+    df = y_type_true.to_frame(name="type").copy()
+    df["rank"] = ranks
+    df_sorted = df.sort_values("rank", ascending=False)
+
+    recall = fast_recall_curve(df_sorted["type"], target_class="good")
+    x = np.linspace(0, 1, len(recall))
+    auc_val = auc(x, recall)
+
+    return recall.tolist(), auc_val
 
 
 def compute_class_balance(y_real_pool: pd.Series, y_gal_pool: pd.Series, selected_ids: list):
