@@ -15,13 +15,17 @@ def uncertainty_sampling(model, X_pool: pd.DataFrame, batch_size: int) -> list:
     return list(pd.Series(scores, index=X_pool.index).nlargest(batch_size).index)
 
 
-def entropy_sampling(model, X_pool: pd.DataFrame, batch_size: int) -> list:
+def entropy_sampling(model,
+                     X_pool: pd.DataFrame,
+                     y_true: pd.Series,
+                     batch_size: int) -> list:
     """Sampling the highest entropy predictions. (That is, those with the most CONFUSION)"""
     probs = model.predict_proba(X_pool)[:, 1]
     # we need to avoid values too close to 0 or 1 in the probabilities to avoid getting infs
     # np.clip does not CLIP the array itself it clips the VALUES to the boundaries we defined,
-    probs = np.clip(probs, 1e-10, 1 - 1e-10)
-    entropy = -probs * np.log2(probs) - (1 - probs) * np.log2(1 - probs)
+    probs = np.clip(probs, 1e-5, 1 - 1e-5)
+    entropy = -y_true.values * np.log2(probs) - (np.abs(y_true.values - probs)) * np.log2(np.abs(y_true.values - probs))
+
     return list(pd.Series(entropy, index=X_pool.index).nlargest(batch_size).index)
 
 
@@ -29,6 +33,7 @@ def select_batch(
     strategy: str,
     model,
     X_pool: pd.DataFrame,
+    y_true: pd.Series,
     batch_size: int,
     random_state: int = 42
 ) -> list:
@@ -38,6 +43,6 @@ def select_batch(
     elif strategy == "uncertainty":
         return uncertainty_sampling(model, X_pool, batch_size)
     elif strategy == "entropy":
-        return entropy_sampling(model, X_pool, batch_size)
+        return entropy_sampling(model, X_pool, y_true, batch_size)
     else:
         raise ValueError(f"Unknown strategy: {strategy}")

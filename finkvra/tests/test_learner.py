@@ -61,11 +61,11 @@ def test_queryal_smoke_dayn(tmp_path, duck_dayn_data):
 
     # Check logs written with run ID
     expected = [
-        f"{prefix}_{learner.run_id}_metric_history.csv",
-        f"{prefix}_{learner.run_id}_selected_ids.csv",
-        f"{prefix}_{learner.run_id}_class_balance.csv",
-        f"{prefix}_{learner.run_id}_dayn_distribution.csv",
-        f"{prefix}_{learner.run_id}_metadata.json",
+        f"{prefix}_metric_history.csv",
+        f"{prefix}_selected_ids.csv",
+        f"{prefix}_class_balance.csv",
+        f"{prefix}_dayn_distribution.csv",
+        f"{prefix}_metadata.json",
     ]
     for path in expected:
         assert os.path.exists(path)
@@ -96,10 +96,10 @@ def test_queryal_smoke_day1(tmp_path, duck_day1_data):
 
     # Check output files exist
     expected = [
-        f"{prefix}_{learner.run_id}_metric_history.csv",
-        f"{prefix}_{learner.run_id}_selected_ids.csv",
-        f"{prefix}_{learner.run_id}_class_balance.csv",
-        f"{prefix}_{learner.run_id}_metadata.json",
+        f"{prefix}_metric_history.csv",
+        f"{prefix}_selected_ids.csv",
+        f"{prefix}_class_balance.csv",
+        f"{prefix}_metadata.json",
     ]
     for path in expected:
         assert os.path.exists(path)
