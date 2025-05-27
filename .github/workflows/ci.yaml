@@ -15,6 +15,7 @@ jobs:
         python-version: ["3.8", "3.10", "3.12"]
 
     steps:
+
     - name: Checkout repo
       uses: actions/checkout@v3
 
@@ -31,6 +32,9 @@ jobs:
     - name: Install project
       run: |
         pip install .[dev]
+
+    - name: List files
+      run: ls -R
 
     - name: Run tests with coverage
       run: |
