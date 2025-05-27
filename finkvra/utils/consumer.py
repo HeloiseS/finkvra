@@ -7,6 +7,8 @@ from astropy.time import Time
 import pandas as pd
 import numpy as np
 import time
+from datetime import datetime
+
 
 def process_alerts(alerts: list) -> pd.DataFrame:
     """Process raw alerts into a cleaned DataFrame."""
@@ -38,6 +40,7 @@ def poll_n_alerts(myconfig, topics, n=10, outidr = '~/Data/FinkZTFStream/') -> N
         List of string with topic names
     """
     maxtimeout = 5
+    prefix = datetime.now().strftime("%Y%m%d_%H%M%S")
 
     # Instantiate a consumer
     consumer = AlertConsumer(topics, myconfig)
@@ -52,7 +55,7 @@ def poll_n_alerts(myconfig, topics, n=10, outidr = '~/Data/FinkZTFStream/') -> N
     # Analyse output - we just print some values for example
     if not np.all([i is None for i in alerts]):
         clean_dat = process_alerts(alerts)
-        clean_dat.to_csv(outidr + 'alerts.csv', mode='a', header=False)
+        clean_dat.to_parquet(outidr +f'{prefix}_alerts.parquet')
 
 
     else:
