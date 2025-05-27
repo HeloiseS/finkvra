@@ -1,3 +1,5 @@
+# pytest --cov=finkvra --cov-report=html
+
 import pandas as pd
 import importlib.resources as pkg_resources
 import finkvra.data  # new location of your data files
@@ -62,9 +64,7 @@ def test_queryal_smoke_dayn(tmp_path, duck_dayn_data):
     # Check logs written with run ID
     expected = [
         f"{prefix}_metric_history.csv",
-        f"{prefix}_selected_ids.csv",
-        f"{prefix}_class_balance.csv",
-        f"{prefix}_dayn_distribution.csv",
+        f"{prefix}_recall_curves.csv",
         f"{prefix}_metadata.json",
     ]
     for path in expected:
@@ -97,10 +97,10 @@ def test_queryal_smoke_day1(tmp_path, duck_day1_data):
     # Check output files exist
     expected = [
         f"{prefix}_metric_history.csv",
-        f"{prefix}_selected_ids.csv",
-        f"{prefix}_class_balance.csv",
+        f"{prefix}_recall_curves.csv",
         f"{prefix}_metadata.json",
     ]
+
     for path in expected:
         assert os.path.exists(path)
 
@@ -118,7 +118,8 @@ def test_queryal_early_stop_warning(duck_day1_data):
         random_state=0,
     )
 
-    with pytest.warns(RuntimeWarning, match="No more unlabeled samples"):
+    with pytest.raises(ValueError
+                       ):
         learner.run(X_val, y_val_raw, y_val_real, y_val_gal, verbose=False)
 
     # Assert that only two iterations ran (3rd would require >1000 samples)

@@ -17,7 +17,8 @@ dependencies = [
     "scikit-learn>=1.2",
     "matplotlib",
     "plotly",
-    "tqdm"
+    "tqdm",
+    "fink_client"
 ]
 requires-python = ">=3.8"
 
@@ -33,4 +34,4 @@ dev = [
 where = ["finkvra"]
 
 [tool.setuptools.package-data]
-"finkvra.data" = ["*.csv"]
+"finkvra.data" = ["*.csv", "*.npz"]
