@@ -27,6 +27,10 @@ jobs:
     - name: Install build dependencies
       run: |
         python -m pip install --upgrade pip
+
+    - name: Runs just the test
+      run: |
+        python -m pytest 
         
     - name: Run tests with coverage
       run: |
