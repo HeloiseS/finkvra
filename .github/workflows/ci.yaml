@@ -35,6 +35,7 @@ jobs:
 
     - name: Run tests with coverage
       run: |
+        export PYTHONPATH=$PYTHONPATH:$(pwd)/finkvra
         pytest --cov=finkvra --cov-report=html --cov-report=term
 
     - name: Upload HTML coverage report
