@@ -12,6 +12,8 @@ authors = [
 readme = "README.md"
 #license = { text = "MIT" }
 dependencies = [
+    "pytest",
+    "pytest-cov",
     "pandas>=1.5",
     "numpy>=1.23",
     "scikit-learn>=1.2",
