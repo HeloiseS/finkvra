@@ -42,25 +42,25 @@ def test_uncertainty_sampling(dummy_data, trained_model):
 
 
 def test_entropy_sampling(dummy_data, trained_model):
-    X_df, _ = dummy_data
-    selected = strategy.entropy_sampling(trained_model, X_df, batch_size=10)
+    X_df, y = dummy_data
+    selected = strategy.entropy_sampling(trained_model, X_df, y_true=y, batch_size=10)
     assert isinstance(selected, list)
     assert len(selected) == 10
     assert all(idx in X_df.index for idx in selected)
 
 
 def test_strategies_select_different_samples(dummy_data, trained_model):
-    X_df, _ = dummy_data
+    X_df, y = dummy_data
     rand = set(strategy.random_sampling(X_df, batch_size=10, random_state=0))
     unc = set(strategy.uncertainty_sampling(trained_model, X_df, batch_size=10))
-    ent = set(strategy.entropy_sampling(trained_model, X_df, batch_size=10))
+    ent = set(strategy.entropy_sampling(trained_model, X_df, y_true=y, batch_size=10))
 
     # Sanity check: at least one strategy is different from another
     assert not (rand == unc == ent)
 
 
 def test_select_batch_dispatcher(dummy_data, trained_model):
-    X_df, _ = dummy_data
+    X_df, y = dummy_data
 
     # Test each valid strategy
     for strat in ["random", "uncertainty", "entropy"]:
@@ -68,6 +68,7 @@ def test_select_batch_dispatcher(dummy_data, trained_model):
             strategy=strat,
             model=trained_model,
             X_pool=X_df,
+            y_true=y,
             batch_size=5,
             random_state=0
         )
@@ -81,5 +82,6 @@ def test_select_batch_dispatcher(dummy_data, trained_model):
             strategy="not_a_real_strategy",
             model=trained_model,
             X_pool=X_df,
+            y_true=y,
             batch_size=5
         )

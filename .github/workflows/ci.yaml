@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        python-version: ["3.8", "3.10", "3.12"]
+        python-version: ["3.9", "3.10", "3.12"]
 
     steps:
 
@@ -35,10 +35,11 @@ jobs:
 
     - name: Run tests with coverage
       run: |
+        export PYTHONPATH=$PYTHONPATH:$(pwd)/finkvra
         pytest --cov=finkvra --cov-report=html --cov-report=term
 
     - name: Upload HTML coverage report
       uses: actions/upload-artifact@v4
       with:
-        name: coverage-html
+        name: coverage-html-${{ matrix.python-version }}
         path: htmlcov/
