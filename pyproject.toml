@@ -18,7 +18,8 @@ dependencies = [
     "matplotlib",
     "plotly",
     "tqdm",
-    "fink_client"
+    "fink_client",
+    "lasair",
 ]
 requires-python = ">=3.9"
 
