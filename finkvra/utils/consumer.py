@@ -13,9 +13,12 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s.%(funcName)s: %(message)s")
 
 
+
 def process_alerts(alerts: list) -> pd.DataFrame:
     """Process raw alerts into a cleaned DataFrame."""
+
     logger.info("Running alert processing")
+
     dat = pd.DataFrame.from_records(alerts)
     dat['mag'] = dat.apply(lambda alert: extract_field(alert, 'magpsf'), axis=1)
     dat['maglim'] = dat.apply(lambda alert: extract_field(alert, 'diffmaglim'), axis=1)
@@ -25,7 +28,9 @@ def process_alerts(alerts: list) -> pd.DataFrame:
     dat['dec'] = dat.apply(lambda row: row['candidate']['dec'], axis=1)
     dat['drb'] = dat.apply(lambda row: row['candidate']['drb'], axis=1)
 
+
     logger.info("Alerts processed into dataframe: %d", len(dat))
+
     return dat[[
         'candid', 'objectId', 'ra', 'dec', 'drb',
         'mjd', 'mag', 'maglim', 'fid',
@@ -63,6 +68,7 @@ def run_sherlock(alert_data:pd.DataFrame):
     logger.info("After removing AGNs and Variable Stars, %d alerts remain.", clean_data.shape[0])
     return clean_data
 
+
 def poll_n_alerts(myconfig, topics, n=10, outidr = '~/Data/FinkZTFStream/') -> None:
     """ Connect to and poll fink servers once.
 
@@ -73,7 +79,9 @@ def poll_n_alerts(myconfig, topics, n=10, outidr = '~/Data/FinkZTFStream/') -> N
     topics: list of str
         List of string with topic names
     """
+
     logger.info(f"Polling {n} alerts from topics: {topics}")
+
     maxtimeout = 5
     prefix = datetime.now().strftime("%Y%m%d_%H%M%S")
 
@@ -124,3 +132,4 @@ if __name__ == "__main__":
 
     n_alerts = 50
     poll_n_alerts(myconfig, topics, n=n_alerts)
+
