@@ -3,7 +3,6 @@ import yaml
 import pandas as pd
 from finkvra.active_learning.learner import QueryAL
 from finkvra.utils.labels import preprocess_labels
-import argparse
 
 def load_config(path):
     with open(path, "r") as f:
