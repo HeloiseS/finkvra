@@ -10,7 +10,8 @@ import os
 
 # Setup logger
 logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s.%(funcName)s: %(message)s")
+logging.basicConfig(level=logging.INFO, 
+                    format="%(asctime)s [%(levelname)s] %(name)s.%(funcName)s: %(message)s")
 
 
 
@@ -69,7 +70,10 @@ def run_sherlock(alert_data:pd.DataFrame):
     return clean_data
 
 
-def poll_n_alerts(myconfig, topics, n=10, outidr = '~/Data/FinkZTFStream/') -> None:
+def poll_n_alerts(myconfig, 
+                  topics, 
+                  n=10, 
+                  outidr = '~/Data/FinkZTFStream/') -> None:
     """ Connect to and poll fink servers once.
 
     Parameters
