@@ -1,17 +1,12 @@
 """ Poll the Fink servers only once at a time """
 import logging
 from fink_client.consumer import AlertConsumer
-from fink_client.configuration import load_credentials
 from fink_client.visualisation import extract_field
-
-from astropy.time import Time
 import pandas as pd
 import numpy as np
-import time
 from datetime import datetime
 import lasair
 import os
-import json
 
 # Setup logger
 logger = logging.getLogger(__name__)

@@ -1,6 +1,4 @@
 import os
-import shutil
-import tempfile
 import pytest
 import yaml
 from finkvra.train import main as train_main

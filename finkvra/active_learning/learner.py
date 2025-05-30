@@ -306,8 +306,8 @@ class QueryAL_old:
             # The training data is the "labeled" or "selected" indexes
             X_train = self.X_pool.loc[self.labeled_idx]
             y_train_real = self.y_real_pool.loc[self.labeled_idx]
-            y_train_gal = self.y_gal_pool.loc[self.labeled_idx].dropna()
-            X_train_gal = X_train.loc[y_train_gal.index]
+            #y_train_gal = self.y_gal_pool.loc[self.labeled_idx].dropna()
+            #X_train_gal = X_train.loc[y_train_gal.index]
 
             # We train the REAL classifier using the same hyperparmaters as
             # in the ATLAS VRA paper.
