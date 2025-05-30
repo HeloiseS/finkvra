@@ -3,8 +3,7 @@ name: Lint
 on:
   push:
     branches: [main]
-  pull_request:
-    paths: ["finkvra/**", "tests/**", ".github/workflows/lint.yml", "pyproject.toml"]
+  pull_request
 
 jobs:
   ruff-lint:
