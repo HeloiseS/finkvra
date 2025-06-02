@@ -20,6 +20,7 @@ def vra_lc_features(row):
     """Function to compute light curve features on each row of a dataframe.
     To be applied to data saved by the poll_n_alerts function in consumer.py.
     """
+
     # need to make sure I ignore the negative diffs
     
     pos_diffs = (row.isdiffpos == 't')
@@ -29,6 +30,7 @@ def vra_lc_features(row):
         ndets = sum(pos_diffs)
     except TypeError:
         if pos_diffs is True:
+
             ndets = 1
         else:
             # it's a positive diff or if it's None (to detection) we set ndets to 0 
@@ -36,6 +38,7 @@ def vra_lc_features(row):
 
     # NUMBER OF NON-DETECTIONS
     nnondets = sum(pd.isna(row['mag']))
+
 
     if ndets == 0:
         return 0, nnondets, np.nan, np.nan
