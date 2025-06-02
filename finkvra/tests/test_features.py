@@ -16,6 +16,7 @@ def dummy_clean_data():
         'maglim': [[20.1]*3]*3,
         'mjd': [[60000, 60001, 60002]]*3,
         'fid': [[1, 2, 1]]*3,
+        'isdiffpos': ['f', 't', np.nan],
         'sep_arcsec': [0.4, 0.6, 0.2],
         'lc_features_g': [{
             'amplitude': 1.2, 'linear_fit_reduced_chi2': 0.5, 'linear_fit_slope': 0.3,
@@ -29,10 +30,10 @@ def dummy_clean_data():
 
 def test_vra_lc_features_counts(dummy_clean_data):
     ndets, nnondets, median, std = features.vra_lc_features(dummy_clean_data.iloc[0])
-    assert ndets == 2
+    assert ndets == 1
     assert nnondets == 1
-    assert np.isclose(median, 18.6)
-    assert np.isclose(std, 0.1, atol=0.01)
+    assert np.isclose(median, 18.7)
+    assert np.isclose(std, 0.0, atol=0.01)
 
 def test_make_features_shapes(dummy_clean_data):
     X, meta = features.make_features(dummy_clean_data)

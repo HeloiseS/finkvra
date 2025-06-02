@@ -34,6 +34,7 @@ def test_run_sherlock_filters_classes(mock_lasair):
         'mag': [18.5, 18.7, 19.0],
         'maglim': [20.0, 20.2, 20.1],
         'fid': [1, 2, 1],
+        'isdiffpos': ['t','t','f'],
         'lc_features_g': [None]*3,
         'lc_features_r': [None]*3,
     })
@@ -66,7 +67,8 @@ def test_process_alerts_valid_minimal():
             'jd': 60000.0 + 2400000.5,
             'fid': 1,
             'magpsf': 18.5,
-            'diffmaglim': 20.0
+            'diffmaglim': 20.0,
+            'isdiffpos': 't',
         },
         'lc_features_g': None,
         'lc_features_r': None,
@@ -84,7 +86,7 @@ def test_process_alerts_valid_minimal():
 def test_poll_n_alerts_pipeline(mock_process_alerts, mock_run_sherlock, mock_alert_consumer):
     # Setup mock consumer
     fake_alert = {
-        'candidate': {'ra': 1.0, 'dec': 2.0, 'drb': 0.9, 'jd': 2450000.5, 'fid': 1},
+        'candidate': {'ra': 1.0, 'dec': 2.0, 'drb': 0.9, 'jd': 2450000.5, 'fid': 1, 'isdiffpos':'t'},
         'candid': 1,
         'objectId': 'ZTF1',
         'lc_features_g': None,
