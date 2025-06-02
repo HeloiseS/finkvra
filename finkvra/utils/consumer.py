@@ -25,6 +25,7 @@ def process_alerts(alerts: list) -> pd.DataFrame:
     dat['maglim'] = dat.apply(lambda alert: extract_field(alert, 'diffmaglim'), axis=1)
     dat['mjd'] = dat.apply(lambda alert: extract_field(alert, 'jd'), axis=1) - 2400000.5
     dat['fid'] = dat.apply(lambda alert: extract_field(alert, 'fid'), axis=1)
+    dat['isdiffpos'] = dat.apply(lambda alert: extract_field(alert, 'isdiffpos'), axis=1)
     dat['ra'] = dat.apply(lambda row: row['candidate']['ra'], axis=1)
     dat['dec'] = dat.apply(lambda row: row['candidate']['dec'], axis=1)
     dat['drb'] = dat.apply(lambda row: row['candidate']['drb'], axis=1)
@@ -34,7 +35,7 @@ def process_alerts(alerts: list) -> pd.DataFrame:
 
     return dat[[
         'candid', 'objectId', 'ra', 'dec', 'drb',
-        'mjd', 'mag', 'maglim', 'fid',
+        'mjd', 'mag', 'maglim', 'fid', 'isdiffpos',
         'lc_features_g', 'lc_features_r'
     ]]
 
@@ -129,7 +130,7 @@ if __name__ == "__main__":
     # to fill
     myconfig = {
         'bootstrap.servers': 'kafka-ztf.fink-broker.org:24499',
-        'group.id': 'heloise_test6'
+        'group.id': 'heloise_finkvra'
     }
 
     topics = ['fink_vra_ztf']
