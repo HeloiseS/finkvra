@@ -6,7 +6,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-        <title>AL with static ATLAS data &mdash; Fink VRA dev documentation</title>
+        <title>finkvra &mdash; Fink VRA dev documentation</title>
     
     <link rel="stylesheet" type="text/css" href="_static/dist/fontawesome.css" />
       <link rel="stylesheet" type="text/css" href="_static/dist/theme.css?v=310cf088" />
@@ -14,8 +14,8 @@
             <link rel="index" title="Index" href="genindex.html" />
             <link rel="search" title="Search" href="search.html" />
             <link rel="top" title="Fink VRA dev documentation" href="#" />
-            <link rel="next" title="Fink stream prototypes" href="al_firstloops.html" />
-            <link rel="prev" title="Workflows and pipelines" href="workflow.html" />
+            <link rel="next" title="finkvra.active_learning package" href="finkvra.active_learning.html" />
+            <link rel="prev" title="Fink stream prototypes" href="al_firstloops.html" />
     </head>
 <body>
     <script type="text/javascript" src="_static/dist/blocking.js"></script>
@@ -78,13 +78,13 @@
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflows and pipelines</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Active Learning</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">AL with static ATLAS data</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="al_atlas.html">AL with static ATLAS data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="al_firstloops.html">Fink stream prototypes</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Docs</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="finkvra.html">finkvra</a><ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">finkvra</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="finkvra.active_learning.html">finkvra.active_learning package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="finkvra.data.html">finkvra.data package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="finkvra.utils.html">finkvra.utils package</a></li>
@@ -110,7 +110,7 @@
                         <nav aria-label="breadcrumb">
     <ol class="breadcrumb m-0 p-0 bg-transparent">
         <li class="breadcrumb-item"><a href="index.html">Docs</a></li>
-        <li class="breadcrumb-item active" aria-current="page">AL with static ATLAS data</li>
+        <li class="breadcrumb-item active" aria-current="page">finkvra</li>
     </ol>
 </nav>
                     </div>
@@ -122,11 +122,11 @@
                             <span class="dark-only"><i class="fas fa-sun"></i> Light mode</span>
                             <span class="light-only"><i class="fas fa-moon"></i> Dark mode</span>
                         </button>
-    <a class="btn btn-sm btn-light text-decoration-none" href="https://github.com/HeloiseS/finkvra/docs/al_atlas.rst" rel="nofollow">
+    <a class="btn btn-sm btn-light text-decoration-none" href="https://github.com/HeloiseS/finkvra/docs/finkvra.rst" rel="nofollow">
         <span class="btn-icon"><span class="fab fa-github"></span></span>
         <span class="btn-text">Edit on GitHub</span>
     </a>
-    <a class="btn btn-sm btn-light text-decoration-none" href="_sources/al_atlas.rst.txt" rel="nofollow">
+    <a class="btn btn-sm btn-light text-decoration-none" href="_sources/finkvra.rst.txt" rel="nofollow">
         <span class="btn-icon"><span class="fas fa-code"></span></span>
         <span class="btn-text">View source</span>
     </a>
@@ -141,21 +141,73 @@
                 <div class="row">
                     <div class="col-12 col-lg-9 order-last order-lg-first rst-content">
                         <main role="main" id="main">
-    <section id="al-with-static-atlas-data">
-<h1>AL with static ATLAS data<a class="headerlink" href="#al-with-static-atlas-data" title="Link to this heading">¶</a></h1>
-<p>Active Learning preliminary tests with ATLAS data</p>
+    <section id="finkvra">
+<h1>finkvra<a class="headerlink" href="#finkvra" title="Link to this heading">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="finkvra.active_learning.html">finkvra.active_learning package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="finkvra.active_learning.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finkvra.active_learning.html#finkvra-active-learning-learner-module">finkvra.active_learning.learner module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finkvra.active_learning.html#module-finkvra.active_learning.logger">finkvra.active_learning.logger module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finkvra.active_learning.html#finkvra-active-learning-metrics-module">finkvra.active_learning.metrics module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finkvra.active_learning.html#finkvra-active-learning-strategy-module">finkvra.active_learning.strategy module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finkvra.active_learning.html#module-finkvra.active_learning">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="finkvra.data.html">finkvra.data package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="finkvra.data.html#module-finkvra.data">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="finkvra.utils.html">finkvra.utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="finkvra.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finkvra.utils.html#finkvra-utils-consumer-module">finkvra.utils.consumer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finkvra.utils.html#finkvra-utils-features-module">finkvra.utils.features module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finkvra.utils.html#finkvra-utils-labels-module">finkvra.utils.labels module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finkvra.utils.html#module-finkvra.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="finkvra-train-module">
+<h2>finkvra.train module<a class="headerlink" href="#finkvra-train-module" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-finkvra">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-finkvra" title="Link to this heading">¶</a></h2>
+</section>
 </section>
 
 </main>
                         <nav aria-label="Page navigation" class="py-4 my-5 clearfix font-weight-bold border-top">
-    <a class="float-left" href="workflow.html" title="Previous">
-        <span aria-hidden="true">←&nbsp;</span>Workflows and pipelines
+    <a class="float-left" href="al_firstloops.html" title="Previous">
+        <span aria-hidden="true">←&nbsp;</span>Fink stream prototypes
     </a>
-    <a class="float-right" href="al_firstloops.html" title="Next">
-        Fink stream prototypes <span aria-hidden="true">&nbsp;→</span>
+    <a class="float-right" href="finkvra.active_learning.html" title="Next">
+        finkvra.active_learning package <span aria-hidden="true">&nbsp;→</span>
     </a>
 </nav>
                     </div>
+                    
+                    <nav class="col-12 col-lg-3 pb-4">
+                        <div class="sticky-top toc page-toc" aria-labelledby="page-toc-heading">
+                            <p class="font-weight-bold" id="page-toc-heading">Page contents</p>
+                            <ul>
+<li><a class="reference internal" href="#">finkvra</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#finkvra-train-module">finkvra.train module</a></li>
+<li><a class="reference internal" href="#module-finkvra">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+                        </div>
+                    </nav>
                     
                 </div>
             </div>
