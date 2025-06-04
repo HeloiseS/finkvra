@@ -30,7 +30,7 @@
                         <img src="_static/img/logo.png" width="75" height="79" alt="VRA"
                             class="logo-img"
                         />
-                        Fink VRA
+                        Fink VRA - Research Notes
                     </a>
                 
                 
@@ -39,11 +39,7 @@
                             
                                 
                                 
-                                <li class="nav-item"><a class="nav-link"  href=" hfstevance@gmail.com ">email </a></li>
-                            
-                                
-                                
-                                <li class="nav-item"><a class="nav-link"  href=" https://www.hfstevance.com/"> hfstevance.com </a></li>
+                                <li class="nav-item"><a class="nav-link"  href=" https://www.hfstevance.com/">hfstevance.com </a></li>
                             
                         </ul>
                     </div>
@@ -74,6 +70,7 @@
     <nav class="toc mt-3" aria-label="Main menu">
         <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickrefs.html">📞 Speed Dial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Workflows and pipelines</a></li>
 </ul>
@@ -144,14 +141,20 @@
     <section id="workflows-and-pipelines">
 <h1>Workflows and pipelines<a class="headerlink" href="#workflows-and-pipelines" title="Link to this heading">¶</a></h1>
 <p><cite>Currently everything is run locally on my laptop</cite></p>
-<section id="ingesting-the-ztf-stream">
-<h2>Ingesting the ZTF stream<a class="headerlink" href="#ingesting-the-ztf-stream" title="Link to this heading">¶</a></h2>
-<section id="polling">
-<h3>Polling<a class="headerlink" href="#polling" title="Link to this heading">¶</a></h3>
+<section id="electric-plug-plugging-into-the-stream">
+<h2>🔌 Plugging into the stream<a class="headerlink" href="#electric-plug-plugging-into-the-stream" title="Link to this heading">¶</a></h2>
+<p>First step is to be able to plug into the Kafka stream, grab the alert
+data and save a clean version of the data locally.
+The full packet, which I need to get the historical (30 days) lighcurve data, also has
+the three image stamps - it is _massive_.
+So I don’t save the whole thing, I clean it on the fly and save that locally.</p>
+<section id="radio-listening">
+<h3>📻 Listening<a class="headerlink" href="#radio-listening" title="Link to this heading">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">finkvra</span></code> package has a polling utility (<code class="docutils literal notranslate"><span class="pre">utils.consumer.poll_n_alerts</span></code>)
-which is called <strong>every hour</strong> using a</p>
+use to “listen” to the stream.
+It is called <strong>every hour</strong> in a cron job.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">listen.sh</span></code></p></li>
+<li><p>The bash: <code class="docutils literal notranslate"><span class="pre">listen.sh</span></code></p></li>
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="c1"># Activate conda base and run listener</span>
@@ -165,7 +168,7 @@ python<span class="w"> </span>/home/stevance/Data/FinkZTFStream/listen.py
 </pre></div>
 </div>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">listen.py</span></code> which polls <strong>1000 alerts</strong> from the <code class="docutils literal notranslate"><span class="pre">fink_vra_ztf</span></code> topic (filter)</p></li>
+<li><p>The python: <code class="docutils literal notranslate"><span class="pre">listen.py</span></code> polls <strong>1000 alerts</strong> from the <code class="docutils literal notranslate"><span class="pre">fink_vra_ztf</span></code> topic (filter)</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -193,8 +196,8 @@ It has the following criteria:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">roid&lt;3</span></code>  (not a asteroid)</p></li>
 </ul>
 </section>
-<section id="sherlock">
-<h3>Sherlock<a class="headerlink" href="#sherlock" title="Link to this heading">¶</a></h3>
+<section id="detective-sherlock">
+<h3>🕵 Sherlock<a class="headerlink" href="#detective-sherlock" title="Link to this heading">¶</a></h3>
 <p>In the <code class="docutils literal notranslate"><span class="pre">poll_n_alerts</span></code> function also calls a <code class="docutils literal notranslate"><span class="pre">run_sherlock</span></code> function which calls
 the Lasair API to get the Sherlock classification and some additional features like
 the separation from the host match.</p>
@@ -205,16 +208,16 @@ These can be filtered out during the cleaning step of the polling function with 
 <p>In the context of LSST, through the ACME project, Sherlock will be ran further up stream and I won’t have to worry about this step. So it’s okay if it’s a bit inefficient.</p>
 </div>
 </section>
-<section id="alert-data">
-<h3>Alert Data<a class="headerlink" href="#alert-data" title="Link to this heading">¶</a></h3>
+<section id="card-file-box-alert-data">
+<h3>🗃️ Alert Data<a class="headerlink" href="#card-file-box-alert-data" title="Link to this heading">¶</a></h3>
 <p>The alerts data are saved as <code class="docutils literal notranslate"><span class="pre">.parquet</span></code> files in my <code class="docutils literal notranslate"><span class="pre">~Data/FinkZTFStream/</span></code> folder,
 with the format <code class="docutils literal notranslate"><span class="pre">YYYYMMDD_HHMMSS_alerts.parquet</span></code>.</p>
 </section>
 </section>
-<section id="training-the-models">
-<h2>Training the models<a class="headerlink" href="#training-the-models" title="Link to this heading">¶</a></h2>
-<section id="ml-flow">
-<h3>ML Flow<a class="headerlink" href="#ml-flow" title="Link to this heading">¶</a></h3>
+<section id="mortar-board-training-the-models">
+<h2>🎓 Training the models<a class="headerlink" href="#mortar-board-training-the-models" title="Link to this heading">¶</a></h2>
+<section id="ocean-ml-flow">
+<h3>🌊 ML Flow<a class="headerlink" href="#ocean-ml-flow" title="Link to this heading">¶</a></h3>
 <p>We are logging our models and “experiments” using <a class="reference external" href="https://mlflow.org/">ML Flow</a>.
 The first thing to do is to start the ML Flow server <strong>inside the ``~Science/fink_vra_notebooks/`` directory</strong>.:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mlflow<span class="w"> </span>server<span class="w"> </span>--host<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span>--port<span class="w"> </span><span class="m">6969</span>
@@ -225,8 +228,8 @@ The first thing to do is to start the ML Flow server <strong>inside the ``~Scien
 <p>If you start the server in a different location it won’t find the artifacts and logs.</p>
 </div>
 </section>
-<section id="initialising-the-active-learning-loop">
-<h3>Initialising the active learning loop<a class="headerlink" href="#initialising-the-active-learning-loop" title="Link to this heading">¶</a></h3>
+<section id="checkered-flag-initialising-the-active-learning-loop">
+<h3>🏁 Initialising the active learning loop<a class="headerlink" href="#checkered-flag-initialising-the-active-learning-loop" title="Link to this heading">¶</a></h3>
 <p>So far I’m doing this in a jupyter notebook (see e.g. <code class="docutils literal notranslate"><span class="pre">2.First_training.ipynb</span></code> in <a class="reference external" href="https://github.com/HeloiseS/fink-vra-notebooks">fink-vra-notebooks</a>)
 In this first round of training we define a <code class="docutils literal notranslate"><span class="pre">EXPERIMENT</span></code> name
 which will be used in subsequent runs to find past models.
@@ -236,12 +239,12 @@ apart from the fact that we chose <strong>effectively randomly</strong> the firs
 is not necessarily the same as the number of alerts used in subsequent loops,
 and we will test the best instantiating and follow-up strategies.</p>
 </section>
-<section id="running-subsequent-loops">
-<h3>Running subsequent loops<a class="headerlink" href="#running-subsequent-loops" title="Link to this heading">¶</a></h3>
+<section id="runner-running-subsequent-loops">
+<h3>🏃 Running subsequent loops<a class="headerlink" href="#runner-running-subsequent-loops" title="Link to this heading">¶</a></h3>
 <p>Here I provide the pseudo-code but details of the step by step can be seen in
 <code class="docutils literal notranslate"><span class="pre">3.Testing_AL_loop.ipynb</span></code> in <a class="reference external" href="https://github.com/HeloiseS/fink-vra-notebooks">fink-vra-notebooks</a>)</p>
 <p>On the day-to-day the code is run in a script rather than cell by cell though.</p>
-<p><strong>Pseudo-code</strong></p>
+<p>📜 <strong>Pseudo-code</strong></p>
 <ul>
 <li><p>Set up (ML flow experiment name, linking to server)</p></li>
 <li><p>Get the last successful run ID. This is where we find the previous ML model that we’ll use to predict and sample.</p></li>
@@ -387,16 +390,16 @@ It will return the label and the <code class="docutils literal notranslate"><spa
                             <p class="font-weight-bold" id="page-toc-heading">Page contents</p>
                             <ul>
 <li><a class="reference internal" href="#">Workflows and pipelines</a><ul>
-<li><a class="reference internal" href="#ingesting-the-ztf-stream">Ingesting the ZTF stream</a><ul>
-<li><a class="reference internal" href="#polling">Polling</a></li>
-<li><a class="reference internal" href="#sherlock">Sherlock</a></li>
-<li><a class="reference internal" href="#alert-data">Alert Data</a></li>
+<li><a class="reference internal" href="#electric-plug-plugging-into-the-stream">🔌 Plugging into the stream</a><ul>
+<li><a class="reference internal" href="#radio-listening">📻 Listening</a></li>
+<li><a class="reference internal" href="#detective-sherlock">🕵 Sherlock</a></li>
+<li><a class="reference internal" href="#card-file-box-alert-data">🗃️ Alert Data</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#training-the-models">Training the models</a><ul>
-<li><a class="reference internal" href="#ml-flow">ML Flow</a></li>
-<li><a class="reference internal" href="#initialising-the-active-learning-loop">Initialising the active learning loop</a></li>
-<li><a class="reference internal" href="#running-subsequent-loops">Running subsequent loops</a></li>
+<li><a class="reference internal" href="#mortar-board-training-the-models">🎓 Training the models</a><ul>
+<li><a class="reference internal" href="#ocean-ml-flow">🌊 ML Flow</a></li>
+<li><a class="reference internal" href="#checkered-flag-initialising-the-active-learning-loop">🏁 Initialising the active learning loop</a></li>
+<li><a class="reference internal" href="#runner-running-subsequent-loops">🏃 Running subsequent loops</a></li>
 <li><a class="reference internal" href="#labelling-data">Labelling data</a></li>
 </ul>
 </li>
@@ -421,27 +424,7 @@ It will return the label and the <code class="docutils literal notranslate"><spa
                         
                             
                             
-                            <li class="nav-item"><a class="nav-link text-light"  href="https://wagtail.org/features/">Features</a></li>
-                        
-                            
-                            
-                            <li class="nav-item"><a class="nav-link text-light"  href="https://wagtail.org/about-wagtail/"> About Wagtail</a></li>
-                        
-                            
-                            
-                            <li class="nav-item"><a class="nav-link text-light"  href="https://wagtail.org/services/"> Services</a></li>
-                        
-                            
-                            
-                            <li class="nav-item"><a class="nav-link text-light"  href="https://wagtail.org/blog/"> Blog</a></li>
-                        
-                            
-                            
-                            <li class="nav-item"><a class="nav-link text-light"  href="https://wagtail.org/packages/"> Packages</a></li>
-                        
-                            
-                            
-                            <li class="nav-item"><a class="nav-link text-light"  href="https://wagtail.org/developers/"> Developers</a></li>
+                            <li class="nav-item"><a class="nav-link text-light"  href="mailto:hfstevance@gmail.com">hfstevance@gmail.com </a></li>
                         
                     </ul>
                 </nav>

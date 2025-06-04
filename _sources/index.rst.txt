@@ -3,25 +3,25 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Fink VRA Project
+Fink VRA - Research Notes
 =================================
 
 .. important::
 
-    This website is **work in progress** and **tracks the development of the project**. 
-    If you are interested in my work feel free to reach out (email at top of the page). 
-
+    These are my **personnal research notes** for project that is **under development**.
+    Feel free to loiter. 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Overview
 
+   quickrefs
    introduction
    workflow
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Active Learning
 
    al_atlas

@@ -3,16 +3,22 @@ Workflows and pipelines
 
 `Currently everything is run locally on my laptop`
 
-Ingesting the ZTF stream
--------------------------
+|:electric_plug:| Plugging into the stream
+-------------------------------------------------
+First step is to be able to plug into the Kafka stream, grab the alert 
+data and save a clean version of the data locally. 
+The full packet, which I need to get the historical (30 days) lighcurve data, also has 
+the three image stamps - it is _massive_. 
+So I don't save the whole thing, I clean it on the fly and save that locally. 
 
-Polling
-+++++++++
+|:radio:| Listening
++++++++++++++++++++++++++++++++
 
 The ``finkvra`` package has a polling utility (``utils.consumer.poll_n_alerts``)
-which is called **every hour** using a 
+use to "listen" to the stream. 
+It is called **every hour** in a cron job. 
 
-- ``listen.sh``
+- The bash: ``listen.sh``
 
 .. code-block:: bash
 
@@ -26,7 +32,7 @@ which is called **every hour** using a
 
     python /home/stevance/Data/FinkZTFStream/listen.py
 
-- ``listen.py`` which polls **1000 alerts** from the ``fink_vra_ztf`` topic (filter)
+- The python: ``listen.py`` polls **1000 alerts** from the ``fink_vra_ztf`` topic (filter)
 
 .. code-block:: python
 
@@ -56,8 +62,8 @@ It has the following criteria:
 - ``roid<3``  (not a asteroid)
 
 
-Sherlock
-++++++++++
+|:detective:| Sherlock
++++++++++++++++++++++++++
 In the ``poll_n_alerts`` function also calls a ``run_sherlock`` function which calls
 the Lasair API to get the Sherlock classification and some additional features like 
 the separation from the host match. 
@@ -70,17 +76,17 @@ These can be filtered out during the cleaning step of the polling function with 
     In the context of LSST, through the ACME project, Sherlock will be ran further up stream and I won't have to worry about this step. So it's okay if it's a bit inefficient.
 
 
-Alert Data
-++++++++++++
+|:card_file_box:| Alert Data
++++++++++++++++++++++++++++++++++
 The alerts data are saved as ``.parquet`` files in my ``~Data/FinkZTFStream/`` folder,
 with the format ``YYYYMMDD_HHMMSS_alerts.parquet``.
 
     
-Training the models
-------------------------------------
+|:mortar_board:| Training the models
+-------------------------------------
 
-ML Flow
-++++++++++
+|:ocean:| ML Flow
+++++++++++++++++++++
 We are logging our models and "experiments" using `ML Flow <https://mlflow.org/>`_.
 The first thing to do is to start the ML Flow server **inside the ``~Science/fink_vra_notebooks/`` directory**.:
 
@@ -92,8 +98,8 @@ The first thing to do is to start the ML Flow server **inside the ``~Science/fin
 
     If you start the server in a different location it won't find the artifacts and logs.
 
-Initialising the active learning loop
-+++++++++++++++++++++++++++++++++++++++
+|:checkered_flag:| Initialising the active learning loop
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 So far I'm doing this in a jupyter notebook (see e.g. ``2.First_training.ipynb`` in `fink-vra-notebooks <https://github.com/HeloiseS/fink-vra-notebooks>`_)
 In this first round of training we define a ``EXPERIMENT`` name 
 which will be used in subsequent runs to find past models. 
@@ -105,14 +111,14 @@ is not necessarily the same as the number of alerts used in subsequent loops,
 and we will test the best instantiating and follow-up strategies. 
 
 
-Running subsequent loops
-+++++++++++++++++++++++++
+|:runner:| Running subsequent loops
++++++++++++++++++++++++++++++++++++++
 Here I provide the pseudo-code but details of the step by step can be seen in
 ``3.Testing_AL_loop.ipynb`` in `fink-vra-notebooks <https://github.com/HeloiseS/fink-vra-notebooks>`_)
 
 On the day-to-day the code is run in a script rather than cell by cell though. 
 
-**Pseudo-code**
+|:scroll:| **Pseudo-code**
 
 * Set up (ML flow experiment name, linking to server)
 * Get the last successful run ID. This is where we find the previous ML model that we'll use to predict and sample.
