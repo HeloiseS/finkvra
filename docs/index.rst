@@ -21,3 +21,9 @@ Fink VRA Science and Design Notes
    al_atlas
    al_firstloops
 
+.. toctree::
+   :maxdepth: 1
+   :caption: Docs
+
+   finkvra
+

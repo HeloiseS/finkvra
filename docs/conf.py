@@ -6,6 +6,10 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+import os
+import sys
+sys.path.insert(0, os.path.abspath('..'))
+
 project = 'fink-vra'
 copyright = '2025, Heloise F. Stevance'
 author = 'Heloise F. Stevance'
@@ -24,7 +28,12 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-extensions = ['sphinx_wagtail_theme']
+extensions = ['sphinx_wagtail_theme', 
+    'sphinx.ext.autodoc',      # <-- pulls in docstrings
+    'sphinx.ext.napoleon',     # <-- supports Google/NumPy docstring styles
+    'sphinx.ext.viewcode',     # <-- adds links to source code
+]
+
 
 html_theme = 'sphinx_wagtail_theme'
 #html_theme = 'sphinx_book_theme'  # or 'sphinx_rtd_theme' if installed
