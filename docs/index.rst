@@ -12,6 +12,7 @@ Fink VRA Science and Design Notes
 
    todo
    introduction
+   workflow
 
 
 .. toctree::
