@@ -29,3 +29,16 @@ extensions = ['sphinx_wagtail_theme']
 html_theme = 'sphinx_wagtail_theme'
 #html_theme = 'sphinx_book_theme'  # or 'sphinx_rtd_theme' if installed
 html_static_path = ['_static']
+
+# This is used by Sphinx in many places, such as page title tags.
+project = "My Project"
+
+# These are options specifically for the Wagtail Theme.
+html_theme_options = dict(
+    project_name = "Fink VRA",
+    logo = "img/logo.png",
+    #logo_alt = "Wagtail",
+    logo_height = 79,
+    #logo_url = "/",
+    logo_width = 75,
+)
