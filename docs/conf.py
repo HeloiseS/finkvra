@@ -15,5 +15,7 @@ extensions = [
 templates_path = ['_templates']
 exclude_patterns = []
 
-html_theme = 'sphinx_book_theme'  # or 'sphinx_rtd_theme' if installed
+extensions.append("sphinx_wagtail_theme")
+html_theme = 'sphinx_wagtail_theme'
+#html_theme = 'sphinx_book_theme'  # or 'sphinx_rtd_theme' if installed
 html_static_path = ['_static']

@@ -9,5 +9,4 @@ Contents:
    :maxdepth: 2
    :caption: Notes
 
-   science
-   design
+   notes
