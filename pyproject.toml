@@ -45,5 +45,5 @@ exclude = ["build", "dist", ".venv"]
 
 [tool.coverage.run]
 omit = [
-    "finkvra/utils/labeling.py",  # or whatever path your CLI tool is in
+    "finkvra/utils/labels.py",  
 ]

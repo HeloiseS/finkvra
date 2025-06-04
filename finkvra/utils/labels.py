@@ -148,3 +148,60 @@ def cli_label_alerts(
                 print(f"Invalid input '{inp}'. Try: r/x/g/a/b/v/s/z/q")
 
     logger.info(f"Complete. Saved {len(existing)} labeled entries to {output}.")
+
+
+def cli_label_one_object(
+    object_id: str,
+    sleep: float = 1.0,
+    allowed_labels: dict = None,
+) -> str:
+    """
+    Prompt user to label a single object via the command line.
+
+    Parameters
+    ----------
+    object_id : str
+        ZTF objectId (e.g., 'ZTF21aaaaaaa')
+    sleep : float
+        Time to wait after opening the browser
+    allowed_labels : dict
+        Shortcut keys mapped to label strings
+
+    Returns
+    -------
+    label : str
+        The chosen label (e.g., 'gal', 'extragal'), or None if skipped
+    """
+    if allowed_labels is None:
+        allowed_labels = {
+            "r": "real",
+            "x": "extragal",
+            "g": "gal",
+            "a": "agn",
+            "b": "bogus",
+            "v": "varstar",
+        }
+
+    url = f"https://lasair-ztf.lsst.ac.uk/objects/{object_id}"
+    print(f"\n Object: {object_id}")
+    print(f"Opening {url}...")
+    webbrowser.open(url)
+    time.sleep(sleep)
+
+    while True:
+        inp = input("Label [r/x/g/a/b/v] (s=skip, q=quit): ").strip().lower()
+
+        if inp == "q":
+            return "quit"
+
+        elif inp == "s":
+            print("Skipped.")
+            return None
+
+        elif inp in allowed_labels:
+            label = allowed_labels[inp]
+            print(f"Labeled as '{label}'")
+            return label
+
+        else:
+            print(f"Invalid input '{inp}'. Try: r/x/g/a/b/v/s/q")
