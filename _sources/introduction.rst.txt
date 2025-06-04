@@ -25,6 +25,12 @@ To do this there are two key points of methodology we are harnessing:
 
 3. **Feature engineering**: Although feature-based machine learning is not popular anymore, it is very powerful because it is easier to interpret and understand, which is essential for science especially in a context where we might be creating or updating models quickly. 
 
+
+.. danger::
+
+    You need to think carefully through some science cases to drive the design. For example how does this work for someone who cares about transients that happen on average once a month? In this case you'll need historical data. Here there are **different kinds of use cases** you need to get clear in your head (after you've done your first large set of AL experiments). 
+
+
 |:mortar_board:| Active Learning
 -------------------------------------
 Active Learning (AL) is an area of Machine Learning (ML) concerned about 

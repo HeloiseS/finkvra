@@ -159,6 +159,10 @@ train a VRA <strong>directly on the stream</strong> with <strong>very little dat
 <li><p><strong>Lightweight models</strong>: That can be trained on a few samples and need little compute.</p></li>
 <li><p><strong>Feature engineering</strong>: Although feature-based machine learning is not popular anymore, it is very powerful because it is easier to interpret and understand, which is essential for science especially in a context where we might be creating or updating models quickly.</p></li>
 </ol>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>You need to think carefully through some science cases to drive the design. For example how does this work for someone who cares about transients that happen on average once a month? In this case you’ll need historical data. Here there are <strong>different kinds of use cases</strong> you need to get clear in your head (after you’ve done your first large set of AL experiments).</p>
+</div>
 </section>
 <section id="mortar-board-active-learning">
 <h2>🎓 Active Learning<a class="headerlink" href="#mortar-board-active-learning" title="Link to this heading">¶</a></h2>
