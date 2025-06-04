@@ -24,5 +24,8 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'alabaster'
+extensions = ['sphinx_wagtail_theme']
+
+html_theme = 'sphinx_wagtail_theme'
+#html_theme = 'sphinx_book_theme'  # or 'sphinx_rtd_theme' if installed
 html_static_path = ['_static']
