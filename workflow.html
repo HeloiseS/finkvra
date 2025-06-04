@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" data-content_root="./">
+<head>
+    <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+        <title>Workflows and pipelines &mdash; My Project dev documentation</title>
+    
+    <link rel="stylesheet" type="text/css" href="_static/dist/fontawesome.css" />
+      <link rel="stylesheet" type="text/css" href="_static/dist/theme.css?v=310cf088" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+            <link rel="index" title="Index" href="genindex.html" />
+            <link rel="search" title="Search" href="search.html" />
+            <link rel="top" title="My Project dev documentation" href="#" />
+            <link rel="next" title="1. Active Learning preliminary tests with ATLAS data" href="al_atlas.html" />
+            <link rel="prev" title="Introduction" href="introduction.html" />
+    </head>
+<body>
+    <script type="text/javascript" src="_static/dist/blocking.js"></script>
+    <header class="container-fluid bg-primary">
+        <a class="btn btn-sm btn-light skip-to-content-link" href="#main">Skip to content</a>
+        <div class="container-fluid">
+            <div class="navbar navbar-expand-lg navbar-dark font-weight-bold">
+                    <a href="index.html"
+                        title="Wagtail"
+                        class="logo navbar-brand"
+                    >
+                        <img src="_static/img/logo.png" width="75" height="79" alt="Wagtail"
+                            class="logo-img"
+                        />
+                        Fink VRA
+                    </a>
+                
+                
+                <button class="navbar-toggler btn btn-primary d-lg-none" type="button" data-toggle="collapse" data-target="#collapseSidebar" aria-expanded="false" aria-controls="collapseExample">
+                    <span class="navbar-toggler-icon"></span>
+                    <span class="sr-only">menu</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+            <aside class="col-12 col-lg-3 sidebar-container">
+                <div id="collapseSidebar" class="collapse sticky-top d-lg-block pt-5 pr-lg-4">
+<div id="searchbox" class="searchbox mb-6 px-1" role="search">
+    <form id="search-form" action="search.html" autocomplete="off" method="get" role="search">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text border-right-0 bg-white py-3 pl-3 pr-2"><span class="fas fa-search"></span></div>
+            </div>
+            <input class="form-control py-3 pr-3 pl-1 h-100 border-left-0" type="search" name="q" placeholder="Search documentation" aria-label="Search documentation" id="searchinput" />
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+    </form>
+</div><div class="site-toc">
+    <nav class="toc mt-3" aria-label="Main menu">
+        <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="todo.html">Living to-do &amp; dev notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Workflows and pipelines</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Active Learning</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="al_atlas.html">1. Active Learning preliminary tests with ATLAS data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="al_firstloops.html">2. First AL training loops on Fink ZTF stream</a></li>
+</ul>
+
+    </nav>
+    <template data-toggle-item-template>
+        <button class="btn btn-sm btn-link toctree-expand" type="button">
+            <span class="sr-only">Toggle menu contents</span>
+        </button>
+    </template>
+</div>
+                    <div class="d-lg-none border-bottom">
+                        
+                    </div>
+                </div>
+            </aside>
+            <div class="col-12 col-lg-9 pt-5">
+                <header class="row align-items-baseline">
+                    <div class="col">
+                        <nav aria-label="breadcrumb">
+    <ol class="breadcrumb m-0 p-0 bg-transparent">
+        <li class="breadcrumb-item"><a href="index.html">Docs</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Workflows and pipelines</li>
+    </ol>
+</nav>
+                    </div>
+                    <div class="col-sm-12 col-lg-auto mt-3 mt-lg-3">
+                        <noscript>
+                            <p>JavaScript is required to toggle light/dark mode..</p>
+                        </noscript>
+                        <button id="wagtail-theme" class="btn btn-sm btn-light text-decoration-none" type="button">
+                            <span class="dark-only"><i class="fas fa-sun"></i> Light mode</span>
+                            <span class="light-only"><i class="fas fa-moon"></i> Dark mode</span>
+                        </button>
+    <a class="btn btn-sm btn-light text-decoration-none" href="https://github.com/wagtail/sphinx_wagtail_theme/blob/main/docs/workflow.rst" rel="nofollow">
+        <span class="btn-icon"><span class="fab fa-github"></span></span>
+        <span class="btn-text">Edit on GitHub</span>
+    </a>
+    <a class="btn btn-sm btn-light text-decoration-none" href="_sources/workflow.rst.txt" rel="nofollow">
+        <span class="btn-icon"><span class="fas fa-code"></span></span>
+        <span class="btn-text">View source</span>
+    </a>
+                        
+                    </div>
+                </header>
+                <div class="row" >
+                    <div class="col-12">
+                        <hr class="w-100 my-4">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-9 order-last order-lg-first rst-content">
+                        <main role="main" id="main">
+    <section id="workflows-and-pipelines">
+<h1>Workflows and pipelines<a class="headerlink" href="#workflows-and-pipelines" title="Link to this heading">¶</a></h1>
+<p><cite>Currently everything is run locally on my laptop</cite></p>
+<section id="ingesting-the-ztf-stream">
+<h2>Ingesting the ZTF stream<a class="headerlink" href="#ingesting-the-ztf-stream" title="Link to this heading">¶</a></h2>
+<section id="polling">
+<h3>Polling<a class="headerlink" href="#polling" title="Link to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">finkvra</span></code> package has a polling utility (<code class="docutils literal notranslate"><span class="pre">utils.consumer.poll_n_alerts</span></code>)
+which is called <strong>every hour</strong> using a</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">listen.sh</span></code></p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># Activate conda base and run listener</span>
+
+<span class="nb">source</span><span class="w"> </span>~/anaconda3/etc/profile.d/conda.sh
+conda<span class="w"> </span>activate<span class="w"> </span>base
+<span class="nb">export</span><span class="w"> </span><span class="nv">LASAIR_TOKEN</span><span class="o">=</span><span class="s2">&quot;MYTOKEN&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">PYTHONPATH</span><span class="o">=</span><span class="s2">&quot;/home/stevance/software/finkvra:</span><span class="nv">$PYTHONPATH</span><span class="s2">&quot;</span>
+
+python<span class="w"> </span>/home/stevance/Data/FinkZTFStream/listen.py
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">listen.py</span></code> which polls <strong>1000 alerts</strong> from the <code class="docutils literal notranslate"><span class="pre">fink_vra_ztf</span></code> topic (filter)</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">finkvra.utils</span> <span class="kn">import</span> <span class="n">consumer</span> <span class="k">as</span> <span class="n">finkconsumer</span>
+<span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
+
+
+<span class="n">myconfig</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;bootstrap.servers&#39;</span><span class="p">:</span> <span class="s1">&#39;kafka-ztf.fink-broker.org:24499&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;group.id&#39;</span><span class="p">:</span> <span class="s1">&#39;heloise_finkvra&#39;</span>
+<span class="p">}</span>
+
+<span class="n">topics</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;fink_vra_ztf&#39;</span><span class="p">]</span> <span class="c1"># the fink VRA filter I made with Julien in May 2025</span>
+
+<span class="n">finkconsumer</span><span class="o">.</span><span class="n">poll_n_alerts</span><span class="p">(</span><span class="n">myconfig</span><span class="p">,</span> <span class="n">topics</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">fink_vra_ztf</span></code> topic is directly implemented in the Fink data broker.
+It has the following criteria:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">candidate.magpsf</span> <span class="pre">&gt;</span> <span class="pre">19.5</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">candidate.drb</span> <span class="pre">&gt;0.5</span></code>   (deep learning RB score - we picked 0.5 because they filter on rb score 0.55)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cdsxmatch='Unknown'</span></code> (is it known in simbad)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">roid&lt;3</span></code>  (not a asteroid)</p></li>
+</ul>
+</section>
+<section id="sherlock">
+<h3>Sherlock<a class="headerlink" href="#sherlock" title="Link to this heading">¶</a></h3>
+<p>In the <code class="docutils literal notranslate"><span class="pre">poll_n_alerts</span></code> function also calls a <code class="docutils literal notranslate"><span class="pre">run_sherlock</span></code> function which calls
+the Lasair API to get the Sherlock classification and some additional features like
+the separation from the host match.</p>
+<p>This was added because I found that most alerts returned in the stream were AGNs or Variable Stars.
+These can be filtered out during the cleaning step of the polling function with Sherlock.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>In the context of LSST, through the ACME project, Sherlock will be ran further up stream and I won’t have to worry about this step. So it’s okay if it’s a bit inefficient.</p>
+</div>
+</section>
+<section id="alert-data">
+<h3>Alert Data<a class="headerlink" href="#alert-data" title="Link to this heading">¶</a></h3>
+<p>The alerts data are saved as <code class="docutils literal notranslate"><span class="pre">.parquet</span></code> files in my <code class="docutils literal notranslate"><span class="pre">~Data/FinkZTFStream/</span></code> folder,
+with the format <code class="docutils literal notranslate"><span class="pre">YYYYMMDD_HHMMSS_alerts.parquet</span></code>.</p>
+</section>
+</section>
+<section id="training-the-models">
+<h2>Training the models<a class="headerlink" href="#training-the-models" title="Link to this heading">¶</a></h2>
+<section id="ml-flow">
+<h3>ML Flow<a class="headerlink" href="#ml-flow" title="Link to this heading">¶</a></h3>
+<p>We are logging our models and “experiments” using <a class="reference external" href="https://mlflow.org/">ML Flow</a>.
+The first thing to do is to start the ML Flow server <strong>inside the ``~Science/fink_vra_notebooks/`` directory</strong>.:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mlflow<span class="w"> </span>server<span class="w"> </span>--host<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span>--port<span class="w"> </span><span class="m">6969</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you start the server in a different location it won’t find the artifacts and logs.</p>
+</div>
+</section>
+<section id="initialising-the-active-learning-loop">
+<h3>Initialising the active learning loop<a class="headerlink" href="#initialising-the-active-learning-loop" title="Link to this heading">¶</a></h3>
+<p>So far I’m doing this in a jupyter notebook (see e.g. <code class="docutils literal notranslate"><span class="pre">2.First_training.ipynb</span></code> in <a class="reference external" href="https://github.com/HeloiseS/fink-vra-notebooks">fink-vra-notebooks</a>)
+In this first round of training we define a <code class="docutils literal notranslate"><span class="pre">EXPERIMENT</span></code> name
+which will be used in subsequent runs to find past models.
+The logic for that first round is similar to the other loops described below,
+apart from the fact that we chose <strong>effectively randomly</strong> the first set of alerts.</p>
+<p>The number of alerts used for the first batch set in that notebook
+is not necessarily the same as the number of alerts used in subsequent loops,
+and we will test the best instantiating and follow-up strategies.</p>
+</section>
+<section id="running-subsequent-loops">
+<h3>Running subsequent loops<a class="headerlink" href="#running-subsequent-loops" title="Link to this heading">¶</a></h3>
+<p>Here I provide the pseudo-code but details of the step by step can be seen in
+<code class="docutils literal notranslate"><span class="pre">3.Testing_AL_loop.ipynb</span></code> in <a class="reference external" href="https://github.com/HeloiseS/fink-vra-notebooks">fink-vra-notebooks</a>)</p>
+<p>On the day-to-day the code is run in a script rather than cell by cell though.</p>
+<p><strong>Pseudo-code</strong></p>
+<ul>
+<li><p>Set up (ML flow experiment name, linking to server)</p></li>
+<li><p>Get the last successful run ID. This is where we find the previous ML model that we’ll use to predict and sample.</p></li>
+<li><p>Load the <code class="docutils literal notranslate"><span class="pre">.parquet</span></code> data from the directory where I save the Fink-ZTF data I get from my cron job</p></li>
+<li><p>Make features using <code class="docutils literal notranslate"><span class="pre">finkvra.utils.features.make_features</span></code> (+ remove objects with no postive diff)</p></li>
+<li><p>Load the <cite>candid</cite> we’ve used for training before from the <cite>training_ids.csv</cite> file, and create the <code class="docutils literal notranslate"><span class="pre">CURRENT_ROUND</span></code> number</p></li>
+<li><p>Create <cite>X_pool</cite> the features for the pool of samples that <strong>have not yet been used for training</strong>.</p></li>
+<li><p>Load previous model from our previous run id</p></li>
+<li><p>Predict the classification for all <cite>X_pool</cite></p></li>
+<li><p>Create the <cite>uncertainty_score</cite> column - for now using <strong>uncertainty sampling</strong></p></li>
+<li><p>Order the list of candids from our pool by that <cite>uncertainty_score</cite> column</p></li>
+<li><p><strong>Active Learning loop with dynamic labelling</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Load existing labels from the <cite>labels.csv</cite> file</p></li>
+<li><p>set up the variable for the loop</p></li>
+</ul>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">new_labels</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># where we&#39;ll store new labels that dont already exist</span>
+<span class="n">new_label_candid</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># where we store candid for the new labels we made</span>
+<span class="n">new_sample_candid</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># where we store the candid for the alerts we&#39;ve sampled for our AL loop</span>
+
+<span class="n">N_to_sample</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># our target</span>
+<span class="n">N_i</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ul>
+<li><p>For each candid (ordered from most to least uncertain):</p>
+<ul>
+<li><p>if there is an existing label in <code class="docutils literal notranslate"><span class="pre">labels.csv</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>turn the label to a classification (1, 0 or np.nan)</p></li>
+<li><p>if classification is not NaN: record candid to <cite>new_sampled_candid</cite> and N_1 += 1</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>if not:</p>
+<ul class="simple">
+<li><p>get <code class="docutils literal notranslate"><span class="pre">objectId</span></code> from <code class="docutils literal notranslate"><span class="pre">meta.loc[candid]</span></code></p></li>
+<li><p>use the <code class="docutils literal notranslate"><span class="pre">finkvra.utils.labels.cli_label_one_object</span></code> (input = <code class="docutils literal notranslate"><span class="pre">objectId</span></code>, output = label)</p></li>
+<li><p>turn the label to a classification (1, 0 or np.nan)</p></li>
+<li><p>if classification is not NaN: record candid to <code class="docutils literal notranslate"><span class="pre">new_sampled_candid</span></code> and N_1 += 1</p></li>
+</ul>
+</li>
+<li><p>Check if N_i == N_to_sample</p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Make an updated label data frame and write out to <code class="docutils literal notranslate"><span class="pre">labels.csv</span></code></p></li>
+<li><p>concat the previous training candid and the new sample candid to make our <strong>training ids</strong></p></li>
+<li><p>Make <code class="docutils literal notranslate"><span class="pre">X_train</span></code> and <code class="docutils literal notranslate"><span class="pre">y_train</span></code> from X and labels and the training ids</p></li>
+<li><p>Start the ML flow run:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">(</span><span class="n">run_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;round_</span><span class="si">{</span><span class="n">CURRENT_ROUND</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">SAMPLING_STRATEGY</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">):</span>
+
+    <span class="c1"># Log metadata</span>
+    <span class="n">meta_info</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;round&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">CURRENT_ROUND</span><span class="p">),</span>
+        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+        <span class="s2">&quot;n_train&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+        <span class="s2">&quot;sampling_strategy&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">SAMPLING_STRATEGY</span><span class="p">),</span>
+        <span class="s2">&quot;model_tag&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">MODEL_TAG</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;meta.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">meta_info</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="s2">&quot;meta.json&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Train model</span>
+    <span class="n">clf_new</span> <span class="o">=</span> <span class="n">HistGradientBoostingClassifier</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                                            <span class="n">l2_regularization</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                                            <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+                                            <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">clf_new</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+    <span class="c1"># Evaluate on training set</span>
+    <span class="n">acc</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">clf_new</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metric</span><span class="p">(</span><span class="s2">&quot;train_accuracy&quot;</span><span class="p">,</span> <span class="n">acc</span><span class="p">)</span>
+
+    <span class="c1"># Log model</span>
+    <span class="n">signature</span> <span class="o">=</span> <span class="n">infer_signature</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">clf_new</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">))</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">sklearn</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span>
+        <span class="n">clf_new</span><span class="p">,</span>
+        <span class="n">artifact_path</span><span class="o">=</span><span class="n">ARTIFACT_PATH</span><span class="p">,</span>
+        <span class="n">signature</span><span class="o">=</span><span class="n">signature</span><span class="p">,</span>
+        <span class="n">input_example</span><span class="o">=</span><span class="n">X_train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Save training state</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">EXPERIMENT</span><span class="si">}</span><span class="s2">_training_ids.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="labelling-data">
+<h3>Labelling data<a class="headerlink" href="#labelling-data" title="Link to this heading">¶</a></h3>
+<p>The labels created through our labeling step are saved in the same directory as the <code class="docutils literal notranslate"><span class="pre">.parquet</span></code> files
+in <code class="docutils literal notranslate"><span class="pre">labeld.csv</span></code> with columns <code class="docutils literal notranslate"><span class="pre">candid</span></code>, <code class="docutils literal notranslate"><span class="pre">objectId</span></code>, <code class="docutils literal notranslate"><span class="pre">label</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamp</span></code>.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">candid</span></code> and <code class="docutils literal notranslate"><span class="pre">objectId</span></code> columns are not the same. The <code class="docutils literal notranslate"><span class="pre">candid</span></code> is the unique identifier of the alert, while the <code class="docutils literal notranslate"><span class="pre">objectId</span></code> is the unique identifier of the object in ZTF.</p>
+</div>
+<p>The labels are indexed on <code class="docutils literal notranslate"><span class="pre">candid</span></code> not <code class="docutils literal notranslate"><span class="pre">objectId</span></code>, and generally speaking when sampling
+data we go by <code class="docutils literal notranslate"><span class="pre">candid</span></code> not <code class="docutils literal notranslate"><span class="pre">objectId</span></code>. This means that a given object may be given
+different labels if I eyeball it on different dates. At this stage I think this is a
+good thing because I am still working with the mindset of reproducing human classification.
+If we want to do <strong>better than human</strong> classification later, this may have to be reviewed.</p>
+<p>There are two ways to label the alerts:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>In bulk using the <code class="docutils literal notranslate"><span class="pre">finkvra.utils.labels.cli_label_alerts</span></code> command line utility.</dt><dd><p>This is useful for the first round of training, where we want to label a large number of alerts.
+It will create a <code class="docutils literal notranslate"><span class="pre">labeled.csv</span></code> file in the same directory as the <code class="docutils literal notranslate"><span class="pre">.parquet</span></code> files.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>One at a time using the <code class="docutils literal notranslate"><span class="pre">finkvra.utils.labels.cli_label_one_object</span></code> command line utility.</dt><dd><p>This is useful for the active learning loop, where we want to label a small number of alerts at a time.
+It will return the label and the <code class="docutils literal notranslate"><span class="pre">objectId</span></code> of the alert.</p>
+</dd>
+</dl>
+</li>
+</ol>
+</section>
+</section>
+</section>
+
+</main>
+                        <nav aria-label="Page navigation" class="py-4 my-5 clearfix font-weight-bold border-top">
+    <a class="float-left" href="introduction.html" title="Previous">
+        <span aria-hidden="true">←&nbsp;</span>Introduction
+    </a>
+    <a class="float-right" href="al_atlas.html" title="Next">
+        1. Active Learning preliminary tests with ATLAS data <span aria-hidden="true">&nbsp;→</span>
+    </a>
+</nav>
+                    </div>
+                    
+                    <nav class="col-12 col-lg-3 pb-4">
+                        <div class="sticky-top toc page-toc" aria-labelledby="page-toc-heading">
+                            <p class="font-weight-bold" id="page-toc-heading">Page contents</p>
+                            <ul>
+<li><a class="reference internal" href="#">Workflows and pipelines</a><ul>
+<li><a class="reference internal" href="#ingesting-the-ztf-stream">Ingesting the ZTF stream</a><ul>
+<li><a class="reference internal" href="#polling">Polling</a></li>
+<li><a class="reference internal" href="#sherlock">Sherlock</a></li>
+<li><a class="reference internal" href="#alert-data">Alert Data</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#training-the-models">Training the models</a><ul>
+<li><a class="reference internal" href="#ml-flow">ML Flow</a></li>
+<li><a class="reference internal" href="#initialising-the-active-learning-loop">Initialising the active learning loop</a></li>
+<li><a class="reference internal" href="#running-subsequent-loops">Running subsequent loops</a></li>
+<li><a class="reference internal" href="#labelling-data">Labelling data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+                        </div>
+                    </nav>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="container-fluid bg-primary text-light">
+        <div class="container">
+            <div class="row">
+        <div class="col p-4">
+            
+                <nav aria-label="Footer">
+                    <ul class="nav justify-content-center mb-2">
+                        
+                            
+                            
+                            <li class="nav-item"><a class="nav-link text-light"  href="https://wagtail.org/features/">Features</a></li>
+                        
+                            
+                            
+                            <li class="nav-item"><a class="nav-link text-light"  href="https://wagtail.org/about-wagtail/"> About Wagtail</a></li>
+                        
+                            
+                            
+                            <li class="nav-item"><a class="nav-link text-light"  href="https://wagtail.org/services/"> Services</a></li>
+                        
+                            
+                            
+                            <li class="nav-item"><a class="nav-link text-light"  href="https://wagtail.org/blog/"> Blog</a></li>
+                        
+                            
+                            
+                            <li class="nav-item"><a class="nav-link text-light"  href="https://wagtail.org/packages/"> Packages</a></li>
+                        
+                            
+                            
+                            <li class="nav-item"><a class="nav-link text-light"  href="https://wagtail.org/developers/"> Developers</a></li>
+                        
+                    </ul>
+                </nav>
+            
+            <div class="text-center">
+                    &copy; Copyright 2025, Heloise F. Stevance
+            </div>
+            <div class="text-center text-white-50 font-italic mt-3">
+                <small>
+                    Created using
+                    <a class="text-white" href="https://github.com/wagtail/sphinx_wagtail_theme" rel="nofollow" target="_blank">
+                        Sphinx Wagtail Theme 6.5.0
+                    </a>
+                    and
+                    <a class="text-white" href="https://www.sphinx-doc.org/" rel="nofollow" target="_blank">
+                        Sphinx 8.2.3
+                    </a>
+                </small>
+            </div>
+        </div>
+    </div>
+        </div>
+    </footer>
+        <script src="_static/documentation_options.js?v=3ce10a4d"></script>
+        <script src="_static/doctools.js?v=9bcbadda"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script type="text/javascript" src="_static/dist/theme.js"></script>
+        <script type="text/javascript" src="_static/dist/vendor.js"></script>
+        <script type="text/javascript" src="_static/searchtools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function() { Search.loadIndex("searchindex.js"); });
+        </script>
+        <script type="text/javascript" id="searchindexloader"></script>
+    </body>
+</html>
