@@ -32,6 +32,8 @@ dev = [
     "jupyter"
 ]
 
+docs = ["sphinx==7.4.7", "sphinx_rtd_theme==3.0.2"]    
+
 [tool.setuptools.packages.find]
 where = ["finkvra"]
 
