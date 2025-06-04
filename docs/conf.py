@@ -1,21 +1,28 @@
-import os
-import sys
-sys.path.insert(0, os.path.abspath('..'))  # So Sphinx can find your code
+# Configuration file for the Sphinx documentation builder.
+#
+# For the full list of built-in configuration values, see the documentation:
+# https://www.sphinx-doc.org/en/master/usage/configuration.html
 
-project = 'finkvra'
-author = 'Heloise F Stevance'
+# -- Project information -----------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
+
+project = 'fink-vra'
+copyright = '2025, Heloise F. Stevance'
+author = 'Heloise F. Stevance'
 release = 'dev'
 
-extensions = [
-    'sphinx.ext.autodoc',      # Auto docstrings from code
-    'sphinx.ext.napoleon',     # Google/NumPy style docstrings
-    'sphinx.ext.viewcode',     # Add links to source code
-]
+# -- General configuration ---------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
+
+extensions = []
 
 templates_path = ['_templates']
-exclude_patterns = []
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
-extensions.append("sphinx_wagtail_theme")
-html_theme = 'sphinx_wagtail_theme'
-#html_theme = 'sphinx_book_theme'  # or 'sphinx_rtd_theme' if installed
+
+
+# -- Options for HTML output -------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
+
+html_theme = 'alabaster'
 html_static_path = ['_static']
