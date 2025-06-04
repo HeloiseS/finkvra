@@ -13,7 +13,7 @@ show:
 2. The first training round, including ML Flow logging
 3. An AL loop for a follow-up round.
 
-The latter code is put in a script which is easier to run: `gal_model_AL_loop.py`.
+The latter code is put in a script which is easier to run: ``gal_model_AL_loop.py``.
 
 2.1 The features
 ------------------
