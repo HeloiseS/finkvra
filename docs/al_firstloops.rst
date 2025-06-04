@@ -130,4 +130,9 @@ can see how the models improve with each round.
 | 70                  | 0.93             |
 +---------------------+------------------+
 
+.. admonition:: Next Steps
 
+    * Add more metrics to the ML Flow logging, like precision, recall, F1 score, etc.
+    * Add a permutation importance plot to the ML Flow dashboard (and save to csv if possible)
+    * Set up experiments to test different inital and step batch sizes
+    * Set up experiment codes for the real/bogus classifier 
