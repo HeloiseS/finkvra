@@ -3,8 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Fink VRA Science and Design Notes
+Fink VRA Project
 =================================
+
+.. important::
+
+    This website is **work in progress** and **tracks the development of the project**. 
+    If you are interested in my work feel free to reach out (email at top of the page). 
+
 
 .. toctree::
    :maxdepth: 2

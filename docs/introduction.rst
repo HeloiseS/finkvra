@@ -1,10 +1,10 @@
-
-.. important::
-    This website is **work in progress** and **tracks the development of the project**. 
-    If you are interested in my work feel free to reach out. 
-
 Introduction
 ==============
+
+.. important::
+
+    This website is **work in progress** and **tracks the development of the project**. 
+    If you are interested in my work feel free to reach out (email at top of the page). 
 
 
 Motivations
