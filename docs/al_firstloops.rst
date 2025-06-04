@@ -134,5 +134,7 @@ can see how the models improve with each round.
 
     * Add more metrics to the ML Flow logging, like precision, recall, F1 score, etc.
     * Add a permutation importance plot to the ML Flow dashboard (and save to csv if possible)
+    * Add utilities to check balance of the training sets
     * Set up experiments to test different inital and step batch sizes
+    * Set up experiments to test different learning rates and whether balancing class weights helps.
     * Set up experiment codes for the real/bogus classifier 
