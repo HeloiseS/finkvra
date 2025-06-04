@@ -6,15 +6,15 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-        <title>ma notes &mdash; fink-vra dev documentation</title>
+        <title>2. First AL training loops on Fink ZTF stream &mdash; My Project dev documentation</title>
     
     <link rel="stylesheet" type="text/css" href="_static/dist/fontawesome.css" />
       <link rel="stylesheet" type="text/css" href="_static/dist/theme.css?v=310cf088" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
             <link rel="index" title="Index" href="genindex.html" />
             <link rel="search" title="Search" href="search.html" />
-            <link rel="top" title="fink-vra dev documentation" href="#" />
-            <link rel="prev" title="Fink VRA Science and Design Notes" href="index.html" />
+            <link rel="top" title="My Project dev documentation" href="#" />
+            <link rel="prev" title="1. Active Learning preliminary tests with ATLAS data" href="al_atlas.html" />
     </head>
 <body>
     <script type="text/javascript" src="_static/dist/blocking.js"></script>
@@ -26,10 +26,10 @@
                         title="Wagtail"
                         class="logo navbar-brand"
                     >
-                        <img src="_static/img/wagtail-logo-circle.svg" width="45" height="59" alt="Wagtail"
+                        <img src="_static/img/logo.png" width="75" height="79" alt="Wagtail"
                             class="logo-img"
                         />
-                        Sphinx Wagtail Theme
+                        Fink VRA
                     </a>
                 
                 
@@ -57,9 +57,15 @@
     </form>
 </div><div class="site-toc">
     <nav class="toc mt-3" aria-label="Main menu">
-        <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+        <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">Living to-do &amp; dev notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Active Learning</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">ma notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="al_atlas.html">1. Active Learning preliminary tests with ATLAS data</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. First AL training loops on Fink ZTF stream</a></li>
 </ul>
 
     </nav>
@@ -80,7 +86,7 @@
                         <nav aria-label="breadcrumb">
     <ol class="breadcrumb m-0 p-0 bg-transparent">
         <li class="breadcrumb-item"><a href="index.html">Docs</a></li>
-        <li class="breadcrumb-item active" aria-current="page">ma notes</li>
+        <li class="breadcrumb-item active" aria-current="page">2. First AL training loops on Fink ZTF stream</li>
     </ol>
 </nav>
                     </div>
@@ -92,11 +98,11 @@
                             <span class="dark-only"><i class="fas fa-sun"></i> Light mode</span>
                             <span class="light-only"><i class="fas fa-moon"></i> Dark mode</span>
                         </button>
-    <a class="btn btn-sm btn-light text-decoration-none" href="https://github.com/wagtail/sphinx_wagtail_theme/blob/main/docs/notes.rst" rel="nofollow">
+    <a class="btn btn-sm btn-light text-decoration-none" href="https://github.com/wagtail/sphinx_wagtail_theme/blob/main/docs/al_firstloops.rst" rel="nofollow">
         <span class="btn-icon"><span class="fab fa-github"></span></span>
         <span class="btn-text">Edit on GitHub</span>
     </a>
-    <a class="btn btn-sm btn-light text-decoration-none" href="_sources/notes.rst.txt" rel="nofollow">
+    <a class="btn btn-sm btn-light text-decoration-none" href="_sources/al_firstloops.rst.txt" rel="nofollow">
         <span class="btn-icon"><span class="fas fa-code"></span></span>
         <span class="btn-text">View source</span>
     </a>
@@ -111,18 +117,45 @@
                 <div class="row">
                     <div class="col-12 col-lg-9 order-last order-lg-first rst-content">
                         <main role="main" id="main">
-    <section id="ma-notes">
-<h1>ma notes<a class="headerlink" href="#ma-notes" title="Link to this heading">¶</a></h1>
-<p>blabla</p>
+    <section id="first-al-training-loops-on-fink-ztf-stream">
+<h1>2. First AL training loops on Fink ZTF stream<a class="headerlink" href="#first-al-training-loops-on-fink-ztf-stream" title="Link to this heading">¶</a></h1>
+<p>The goal here is not to have a performant model but to create the codes
+and utilities to run AL training loops <strong>directly on the Fink ZTF stream</strong>.</p>
+<p>There are jupyter notebooks in the
+<a class="reference external" href="https://github.com/HeloiseS/fink-vra-notebooks">fink-vra-notebooks</a>
+repo (separate so it doesn’t clog the core python utilities) which
+show:</p>
+<ol class="arabic simple">
+<li><p>How the features are extracted from the <code class="docutils literal notranslate"><span class="pre">.parquet</span></code> files we get from the consumer</p></li>
+<li><p>The first training round, including ML Flow logging</p></li>
+<li><p>An AL loop for a follow-up round.</p></li>
+</ol>
+<p>The latter code is put in a script which is easier to run: <cite>gal_model_AL_loop.py</cite>.</p>
+<section id="the-features">
+<h2>2.1 The features<a class="headerlink" href="#the-features" title="Link to this heading">¶</a></h2>
+</section>
 </section>
 
 </main>
                         <nav aria-label="Page navigation" class="py-4 my-5 clearfix font-weight-bold border-top">
-    <a class="float-left" href="index.html" title="Previous">
-        <span aria-hidden="true">←&nbsp;</span>Fink VRA Science and Design Notes
+    <a class="float-left" href="al_atlas.html" title="Previous">
+        <span aria-hidden="true">←&nbsp;</span>1. Active Learning preliminary tests with ATLAS data
     </a>
 </nav>
                     </div>
+                    
+                    <nav class="col-12 col-lg-3 pb-4">
+                        <div class="sticky-top toc page-toc" aria-labelledby="page-toc-heading">
+                            <p class="font-weight-bold" id="page-toc-heading">Page contents</p>
+                            <ul>
+<li><a class="reference internal" href="#">2. First AL training loops on Fink ZTF stream</a><ul>
+<li><a class="reference internal" href="#the-features">2.1 The features</a></li>
+</ul>
+</li>
+</ul>
+
+                        </div>
+                    </nav>
                     
                 </div>
             </div>
