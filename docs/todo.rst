@@ -1,6 +1,11 @@
 Living to-do & dev notes
 =========================
 
-Blabla
+To-do
+-----
+
+
+Dev Notes
+----------
 
 
