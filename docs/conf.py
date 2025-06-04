@@ -29,6 +29,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 extensions = ['sphinx_wagtail_theme', 
+              'sphinxemoji.sphinxemoji',
     'sphinx.ext.autodoc',      # <-- pulls in docstrings
     'sphinx.ext.napoleon',     # <-- supports Google/NumPy docstring styles
     'sphinx.ext.viewcode',     # <-- adds links to source code

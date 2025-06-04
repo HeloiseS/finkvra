@@ -22,6 +22,9 @@ jobs:
       - name: Install my theme
         run: pip install sphinx_wagtail_theme
 
+      - name: Install emojis
+        run: pip install sphinxemoji
+        
       - name: Generate API docs
         run: sphinx-apidoc -o docs/ finkvra
 
