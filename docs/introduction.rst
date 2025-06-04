@@ -3,9 +3,8 @@ Introduction
 
 .. important::
 
-    This website is **work in progress** and **tracks the development of the project**. 
-    If you are interested in my work feel free to reach out (email at top of the page). 
-
+    These are my **personnal research notes** for project that is **under development**.
+    Feel free to loiter. 
 
 Motivations
 -------------

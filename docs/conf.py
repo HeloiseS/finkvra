@@ -44,7 +44,7 @@ project = "Fink VRA"
 
 # These are options specifically for the Wagtail Theme.
 html_theme_options = dict(
-    project_name = "Fink VRA",
+    project_name = "Fink VRA - Research Notes",
     #favicon = "img/logo.png",
     logo = "img/logo.png",
     logo_alt = "VRA",
@@ -52,7 +52,10 @@ html_theme_options = dict(
     logo_url = "https://heloises.github.io/finkvra/index.html",
     logo_width = 75,
     github_url = "https://github.com/HeloiseS/finkvra/docs/",
-    header_links = "email | hfstevance@gmail.com , hfstevance.com | https://www.hfstevance.com/",
+    header_links = "hfstevance.com | https://www.hfstevance.com/",
+    footer_links = ",".join([
+        "hfstevance@gmail.com |mailto:hfstevance@gmail.com",
+    ]),
 )
 
 html_last_updated_fmt = "%b %d, %Y"
