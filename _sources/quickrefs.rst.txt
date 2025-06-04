@@ -1,11 +1,10 @@
 |:telephone_receiver:| Speed Dial
 ====================================
 
-Cheat Sheet
-------------
+Cheat sheet and useful links
 
 |:ocean:| ML Flow
-++++++++++++++++
++++++++++++++++++++
 
 Starting the ML Flow server
 
@@ -21,7 +20,7 @@ Purging an ML Flow experiment (run in the same directory where you run the serve
     mlflow gc --backend-store-uri ./mlruns
 
 
-|:link:| Links
+|:link:| 
 -----------------
 
 - `Project board <https://github.com/users/HeloiseS/projects/2/views/2>`_
