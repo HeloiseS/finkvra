@@ -6,16 +6,16 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-        <title>Introduction &mdash; My Project dev documentation</title>
+        <title>Introduction &mdash; Fink VRA dev documentation</title>
     
     <link rel="stylesheet" type="text/css" href="_static/dist/fontawesome.css" />
       <link rel="stylesheet" type="text/css" href="_static/dist/theme.css?v=310cf088" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
             <link rel="index" title="Index" href="genindex.html" />
             <link rel="search" title="Search" href="search.html" />
-            <link rel="top" title="My Project dev documentation" href="#" />
+            <link rel="top" title="Fink VRA dev documentation" href="#" />
             <link rel="next" title="Workflows and pipelines" href="workflow.html" />
-            <link rel="prev" title="Living to-do &amp; dev notes" href="todo.html" />
+            <link rel="prev" title="Fink VRA Science and Design Notes" href="index.html" />
     </head>
 <body>
     <script type="text/javascript" src="_static/dist/blocking.js"></script>
@@ -23,16 +23,30 @@
         <a class="btn btn-sm btn-light skip-to-content-link" href="#main">Skip to content</a>
         <div class="container-fluid">
             <div class="navbar navbar-expand-lg navbar-dark font-weight-bold">
-                    <a href="index.html"
-                        title="Wagtail"
+                    <a href="/"
+                        title="VRA"
                         class="logo navbar-brand"
                     >
-                        <img src="_static/img/logo.png" width="75" height="79" alt="Wagtail"
+                        <img src="_static/img/logo.png" width="75" height="79" alt="VRA"
                             class="logo-img"
                         />
                         Fink VRA
                     </a>
                 
+                
+                    <div class="collapse navbar-collapse justify-content-end">
+                        <ul class="navbar-nav">
+                            
+                                
+                                
+                                <li class="nav-item"><a class="nav-link"  href=" hfstevance@gmail.com ">email </a></li>
+                            
+                                
+                                
+                                <li class="nav-item"><a class="nav-link"  href=" https://www.hfstevance.com/"> hfstevance.com </a></li>
+                            
+                        </ul>
+                    </div>
                 
                 <button class="navbar-toggler btn btn-primary d-lg-none" type="button" data-toggle="collapse" data-target="#collapseSidebar" aria-expanded="false" aria-controls="collapseExample">
                     <span class="navbar-toggler-icon"></span>
@@ -60,14 +74,13 @@
     <nav class="toc mt-3" aria-label="Main menu">
         <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="todo.html">Living to-do &amp; dev notes</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflows and pipelines</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Active Learning</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="al_atlas.html">1. Active Learning preliminary tests with ATLAS data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="al_firstloops.html">2. First AL training loops on Fink ZTF stream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="al_atlas.html">AL with static ATLAS data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="al_firstloops.html">Fink stream prototypes</a></li>
 </ul>
 
     </nav>
@@ -100,7 +113,7 @@
                             <span class="dark-only"><i class="fas fa-sun"></i> Light mode</span>
                             <span class="light-only"><i class="fas fa-moon"></i> Dark mode</span>
                         </button>
-    <a class="btn btn-sm btn-light text-decoration-none" href="https://github.com/wagtail/sphinx_wagtail_theme/blob/main/docs/introduction.rst" rel="nofollow">
+    <a class="btn btn-sm btn-light text-decoration-none" href="https://github.com/HeloiseS/finkvra/docs/introduction.rst" rel="nofollow">
         <span class="btn-icon"><span class="fab fa-github"></span></span>
         <span class="btn-text">Edit on GitHub</span>
     </a>
@@ -119,21 +132,140 @@
                 <div class="row">
                     <div class="col-12 col-lg-9 order-last order-lg-first rst-content">
                         <main role="main" id="main">
-    <section id="introduction">
+    <div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This website is <strong>work in progress</strong> and <strong>tracks the development of the project</strong>.
+If you are interested in my work feel free to reach out.</p>
+</div>
+<section id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h1>
-<p>blabla</p>
+<section id="motivations">
+<h2>Motivations<a class="headerlink" href="#motivations" title="Link to this heading">¶</a></h2>
+<p>LSST is coming and with it a new stream with potentially regular
+changes to the schema, the data, or changes in science goals.</p>
+<p>This project is aimed at leveraging the resources in the Fink data broker
+to create “Vritual Research Assistants” (VRAs) <strong>quickly</strong> and <strong>dynamically</strong>.
+If the data changes or the goal changes, we want to be able to
+train a VRA <strong>directly on the stream</strong> with <strong>very little data</strong>.</p>
+<p>To do this there are two key points of methodology we are harnessing:</p>
+<ol class="arabic simple">
+<li><p><strong>Active Learning</strong>: We want to be able to train a model on a small amount of data, and then iteratively improve it with new data.</p></li>
+<li><p><strong>Lightweight models</strong>: That can be trained on a few samples and need little compute.</p></li>
+<li><p><strong>Feature engineering</strong>: Although feature-based machine learning is not popular anymore, it is very powerful because it is easier to interpret and understand, which is essential for science especially in a context where we might be creating or updating models quickly.</p></li>
+</ol>
+</section>
+<section id="active-learning">
+<h2>Active Learning<a class="headerlink" href="#active-learning" title="Link to this heading">¶</a></h2>
+<p>Active Learning (AL) is an area of Machine Learning (ML) concerned about
+optimizing the samples used to train our ML models by using the power of
+<strong>Information Theory</strong>, which is a branch of mathematics that
+tries to quantify how much information is in a given bit of data.</p>
+<p>The idea of AL is that if we are smart about which samples we add
+to our training set, we can train a model with less data (or make a more representative model).
+This is useful in our context because we are using light-weight ML models which are
+<strong>supervised</strong> - meaning they require labels alongside the data to learn.
+But <strong>labeling data is expensive</strong> - either because you have to take a spectrum or because
+a human needs to sit down and eyeball.
+With AL we can be picky about the data and train with less labour/extra resources.</p>
+<p>Also the idea of using AL is to train iteratively.
+We start with very little data, the model is bad, we add a little bit of data at a time,
+and over time we make a better model. It takes more steps but we can make a better
+model with a fraction of the data. Training this way <strong>makes sense when we have a constant data stream</strong>.</p>
+<div class="admonition-to-do admonition">
+<p class="admonition-title">To Do</p>
+<p>I could try to quantify that with the ATLAS VRA dataset as it’s a closed experiment.</p>
+</div>
+<section id="uncertainty-sampling">
+<h3>Uncertainty sampling<a class="headerlink" href="#uncertainty-sampling" title="Link to this heading">¶</a></h3>
+<p>In the initial tests of the Fink VRA project we are going to use the most
+basic AL method: <strong>uncertainty sampling</strong>. The concept is simple -
+the samples where the model is most unsure are the ones which are going to
+teach the model the most.
+In uncertainty sampling we take our model from yesterday, predict
+the scores for today’s data, and then we select the top X samples that
+were the most unclear and ask the human for a label.</p>
+<ul class="simple">
+<li><p><strong>Pros</strong>: It’s simple and it’s been shown to be very competitve with other fancier methods <a class="reference external" href="https://arxiv.org/abs/2010.05941">(Kennamer et al. 2020)</a></p></li>
+<li><p><strong>Cons</strong>: It might be easy to end up with samples that have just very little information and even a human eyeballer can’t do much with that. Also if a model is <strong>confidently wrong</strong> we’ll miss it.</p></li>
+</ul>
+</section>
+<section id="entropy">
+<h3>Entropy<a class="headerlink" href="#entropy" title="Link to this heading">¶</a></h3>
+<p>Entropy is not only a concept in physics, it’s also often used in ML, stats and information theory.
+There are different ways to calculate it, always with a probablity being shoved into a natural log, then there
+can be extra steps involved.</p>
+<p>In our present case entropy can be used for two things: <strong>confusion</strong> and <strong>diversity</strong>.</p>
+<section id="confusion">
+<h4>Confusion<a class="headerlink" href="#confusion" title="Link to this heading">¶</a></h4>
+<p>Since we’re doing binary classification the formula is</p>
+<div class="math notranslate nohighlight">
+\[H(X) = -y \ln{p} - \Big (\mid y  - p \mid \times \ln \mid y - p \mid \Big )\]</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">y</span></code> is the <strong>true label</strong> and <code class="docutils literal notranslate"><span class="pre">p</span></code> is the <strong>predicted probability</strong>.</p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>I need to double check my maths - something doesn’t look right</p>
+</div>
+<p>Instead of <strong>sampling our next batch of data</strong> based on our uncertain we are,
+we select based on how far from the “true” label the predictions are.
+The problem is that <strong>this requires knowing the labels</strong>.</p>
+<div class="admonition-to-do admonition">
+<p class="admonition-title">To Do</p>
+<p>Try to add an entropy sampling step every week or two when labels are made available through, e.g. TNS.</p>
+</div>
+</section>
+<section id="diversity">
+<h4>Diversity<a class="headerlink" href="#diversity" title="Link to this heading">¶</a></h4>
+<p>The other way we can use entropy is to quantify how <strong>diverse</strong> the data in our batch is.
+If there are quite a few samples (and there will be quite a few alerts in LSST),
+then the top, say 10, samples in the list might be <strong>very similar</strong>.
+This slows down the learning process and could lead to ovefitting (although HGBDT - see below - are prety robust).</p>
+<div class="admonition-to-do admonition">
+<p class="admonition-title">To Do</p>
+<p>Try to understand how to implement this (see <a class="reference external" href="https://arxiv.org/abs/2010.05941">Kennamer et al. 2020</a>).</p>
+</div>
+</section>
+</section>
+</section>
+<section id="histogram-based-gradient-boosted-decision-trees">
+<h2>Histogram Based Gradient Boosted Decision Trees<a class="headerlink" href="#histogram-based-gradient-boosted-decision-trees" title="Link to this heading">¶</a></h2>
+<p><strong>To Write</strong></p>
+<p>see sklearn documentation</p>
+</section>
 </section>
 
 </main>
                         <nav aria-label="Page navigation" class="py-4 my-5 clearfix font-weight-bold border-top">
-    <a class="float-left" href="todo.html" title="Previous">
-        <span aria-hidden="true">←&nbsp;</span>Living to-do &amp; dev notes
+    <a class="float-left" href="index.html" title="Previous">
+        <span aria-hidden="true">←&nbsp;</span>Fink VRA Science and Design Notes
     </a>
     <a class="float-right" href="workflow.html" title="Next">
         Workflows and pipelines <span aria-hidden="true">&nbsp;→</span>
     </a>
 </nav>
                     </div>
+                    
+                    <nav class="col-12 col-lg-3 pb-4">
+                        <div class="sticky-top toc page-toc" aria-labelledby="page-toc-heading">
+                            <p class="font-weight-bold" id="page-toc-heading">Page contents</p>
+                            <ul>
+<li><a class="reference internal" href="#">Introduction</a><ul>
+<li><a class="reference internal" href="#motivations">Motivations</a></li>
+<li><a class="reference internal" href="#active-learning">Active Learning</a><ul>
+<li><a class="reference internal" href="#uncertainty-sampling">Uncertainty sampling</a></li>
+<li><a class="reference internal" href="#entropy">Entropy</a><ul>
+<li><a class="reference internal" href="#confusion">Confusion</a></li>
+<li><a class="reference internal" href="#diversity">Diversity</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#histogram-based-gradient-boosted-decision-trees">Histogram Based Gradient Boosted Decision Trees</a></li>
+</ul>
+</li>
+</ul>
+
+                        </div>
+                    </nav>
                     
                 </div>
             </div>
@@ -178,16 +310,7 @@
                     &copy; Copyright 2025, Heloise F. Stevance
             </div>
             <div class="text-center text-white-50 font-italic mt-3">
-                <small>
-                    Created using
-                    <a class="text-white" href="https://github.com/wagtail/sphinx_wagtail_theme" rel="nofollow" target="_blank">
-                        Sphinx Wagtail Theme 6.5.0
-                    </a>
-                    and
-                    <a class="text-white" href="https://www.sphinx-doc.org/" rel="nofollow" target="_blank">
-                        Sphinx 8.2.3
-                    </a>
-                </small>
+                <small>Last updated: Jun 04, 2025</small>
             </div>
         </div>
     </div>
@@ -198,6 +321,7 @@
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="_static/copybutton.js?v=f281be69"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script type="text/javascript" src="_static/dist/theme.js"></script>
         <script type="text/javascript" src="_static/dist/vendor.js"></script>
         <script type="text/javascript" src="_static/searchtools.js"></script>

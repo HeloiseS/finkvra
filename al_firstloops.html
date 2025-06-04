@@ -6,15 +6,15 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-        <title>2. First AL training loops on Fink ZTF stream &mdash; My Project dev documentation</title>
+        <title>Fink stream prototypes &mdash; Fink VRA dev documentation</title>
     
     <link rel="stylesheet" type="text/css" href="_static/dist/fontawesome.css" />
       <link rel="stylesheet" type="text/css" href="_static/dist/theme.css?v=310cf088" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
             <link rel="index" title="Index" href="genindex.html" />
             <link rel="search" title="Search" href="search.html" />
-            <link rel="top" title="My Project dev documentation" href="#" />
-            <link rel="prev" title="1. Active Learning preliminary tests with ATLAS data" href="al_atlas.html" />
+            <link rel="top" title="Fink VRA dev documentation" href="#" />
+            <link rel="prev" title="AL with static ATLAS data" href="al_atlas.html" />
     </head>
 <body>
     <script type="text/javascript" src="_static/dist/blocking.js"></script>
@@ -22,16 +22,30 @@
         <a class="btn btn-sm btn-light skip-to-content-link" href="#main">Skip to content</a>
         <div class="container-fluid">
             <div class="navbar navbar-expand-lg navbar-dark font-weight-bold">
-                    <a href="index.html"
-                        title="Wagtail"
+                    <a href="/"
+                        title="VRA"
                         class="logo navbar-brand"
                     >
-                        <img src="_static/img/logo.png" width="75" height="79" alt="Wagtail"
+                        <img src="_static/img/logo.png" width="75" height="79" alt="VRA"
                             class="logo-img"
                         />
                         Fink VRA
                     </a>
                 
+                
+                    <div class="collapse navbar-collapse justify-content-end">
+                        <ul class="navbar-nav">
+                            
+                                
+                                
+                                <li class="nav-item"><a class="nav-link"  href=" hfstevance@gmail.com ">email </a></li>
+                            
+                                
+                                
+                                <li class="nav-item"><a class="nav-link"  href=" https://www.hfstevance.com/"> hfstevance.com </a></li>
+                            
+                        </ul>
+                    </div>
                 
                 <button class="navbar-toggler btn btn-primary d-lg-none" type="button" data-toggle="collapse" data-target="#collapseSidebar" aria-expanded="false" aria-controls="collapseExample">
                     <span class="navbar-toggler-icon"></span>
@@ -59,14 +73,13 @@
     <nav class="toc mt-3" aria-label="Main menu">
         <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="todo.html">Living to-do &amp; dev notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflows and pipelines</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Active Learning</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="al_atlas.html">1. Active Learning preliminary tests with ATLAS data</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">2. First AL training loops on Fink ZTF stream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="al_atlas.html">AL with static ATLAS data</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Fink stream prototypes</a></li>
 </ul>
 
     </nav>
@@ -87,7 +100,7 @@
                         <nav aria-label="breadcrumb">
     <ol class="breadcrumb m-0 p-0 bg-transparent">
         <li class="breadcrumb-item"><a href="index.html">Docs</a></li>
-        <li class="breadcrumb-item active" aria-current="page">2. First AL training loops on Fink ZTF stream</li>
+        <li class="breadcrumb-item active" aria-current="page">Fink stream prototypes</li>
     </ol>
 </nav>
                     </div>
@@ -99,7 +112,7 @@
                             <span class="dark-only"><i class="fas fa-sun"></i> Light mode</span>
                             <span class="light-only"><i class="fas fa-moon"></i> Dark mode</span>
                         </button>
-    <a class="btn btn-sm btn-light text-decoration-none" href="https://github.com/wagtail/sphinx_wagtail_theme/blob/main/docs/al_firstloops.rst" rel="nofollow">
+    <a class="btn btn-sm btn-light text-decoration-none" href="https://github.com/HeloiseS/finkvra/docs/al_firstloops.rst" rel="nofollow">
         <span class="btn-icon"><span class="fab fa-github"></span></span>
         <span class="btn-text">Edit on GitHub</span>
     </a>
@@ -118,8 +131,8 @@
                 <div class="row">
                     <div class="col-12 col-lg-9 order-last order-lg-first rst-content">
                         <main role="main" id="main">
-    <section id="first-al-training-loops-on-fink-ztf-stream">
-<h1>2. First AL training loops on Fink ZTF stream<a class="headerlink" href="#first-al-training-loops-on-fink-ztf-stream" title="Link to this heading">¶</a></h1>
+    <section id="fink-stream-prototypes">
+<h1>Fink stream prototypes<a class="headerlink" href="#fink-stream-prototypes" title="Link to this heading">¶</a></h1>
 <p>The goal here is not to have a performant model but to create the codes
 and utilities to run AL training loops <strong>directly on the Fink ZTF stream</strong>.</p>
 <p>There are jupyter notebooks in the
@@ -133,14 +146,171 @@ show:</p>
 </ol>
 <p>The latter code is put in a script which is easier to run: <code class="docutils literal notranslate"><span class="pre">gal_model_AL_loop.py</span></code>.</p>
 <section id="the-features">
-<h2>2.1 The features<a class="headerlink" href="#the-features" title="Link to this heading">¶</a></h2>
+<h2>The features<a class="headerlink" href="#the-features" title="Link to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">.parquet</span></code> files are put into <code class="docutils literal notranslate"><span class="pre">pandas.dataframes</span></code> and then
+passed to the <cite>finkvra.utils.features.make_features</cite> function which
+creates the <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">meta</span></code> dataframes.
+In <code class="docutils literal notranslate"><span class="pre">1.Finkdata_to_X</span></code> (see <a class="reference external" href="https://github.com/HeloiseS/fink-vra-notebooks">fink-vra-notebooks</a>)
+you can see it done bit by bit.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">meta</span></code> dataframe contains two columns: <code class="docutils literal notranslate"><span class="pre">candid</span></code> and <code class="docutils literal notranslate"><span class="pre">objectId</span></code>.
+It is used to create the links to the Lasair webpages for eyeballing, as the API
+requires <code class="docutils literal notranslate"><span class="pre">objectId</span></code>, not <code class="docutils literal notranslate"><span class="pre">candid</span></code>.</p>
+<p>The features in the <code class="docutils literal notranslate"><span class="pre">X</span></code> dataframe are indexed on <code class="docutils literal notranslate"><span class="pre">candid</span></code>.
+The current list is as follows | <a class="reference external" href="https://github.com/astrolabsoftware/fink-science/tree/master/fink_science/ztf/ad_features">[Fink features ref]</a>
+:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Who Made it</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ra</span></code></p></td>
+<td><p>RA deg</p></td>
+<td><p>ZTF</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dec</span></code></p></td>
+<td><p>Dec deg</p></td>
+<td><p>ZTF</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">drb</span></code></p></td>
+<td><p>Deep RealBogus score</p></td>
+<td><p>ZTF</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ndets</span></code></p></td>
+<td><p>Number detections</p></td>
+<td><p>Me</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">nnondets</span></code></p></td>
+<td><p>Number non detections</p></td>
+<td><p>Me</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dets_median</span></code></p></td>
+<td><p>Median mag detections</p></td>
+<td><p>Me</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dets_std</span></code></p></td>
+<td><p>Standard deviation mag detections</p></td>
+<td><p>Me</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sep_arcsec</span></code></p></td>
+<td><p>Separation in Arcseconds</p></td>
+<td><p>Sherlock</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">amplitude</span></code></p></td>
+<td><p>The half amplitude of the LC</p></td>
+<td><p>Fink</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">linear_fit_reduced_chi2</span></code></p></td>
+<td></td>
+<td><p>Fink</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">linear_fit_slope</span></code></p></td>
+<td></td>
+<td><p>Fink</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">linear_fit_slope_sigma</span></code></p></td>
+<td><p>The linear fit has an error term</p></td>
+<td><p>Fink</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">median</span></code></p></td>
+<td></td>
+<td><p>Fink</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">median_absolute_deviation</span></code></p></td>
+<td></td>
+<td><p>Fink</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">amplituder_</span></code></p></td>
+<td><p>Same as above but in g instead of r</p></td>
+<td><p>Fink</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">linear_fit_reduced_chi2r_</span></code></p></td>
+<td></td>
+<td><p>Fink</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">linear_fit_sloper_</span></code></p></td>
+<td></td>
+<td><p>Fink</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">linear_fit_slope_sigmar_</span></code></p></td>
+<td></td>
+<td><p>Fink</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">medianr_</span></code></p></td>
+<td></td>
+<td><p>Fink</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">median_absolute_deviationr_</span></code></p></td>
+<td></td>
+<td><p>Fink</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Amplitude probs mostly about periodic LC but maybe useful for us?
+Will have to do <strong>permutation importance</strong> to see what’s useful and what isn’t</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>I really should add E(B-V) to the features!</p>
+</div>
+</section>
+<section id="the-first-al-loop">
+<h2>The “first” AL loop<a class="headerlink" href="#the-first-al-loop" title="Link to this heading">¶</a></h2>
+<p>Because of development and extensive debugging I ran many “first” loops but
+now I think I can call it done. Here’s what I’ve got.</p>
+<p>Here I am focusing on galactic models (Galactic Vs Not galactic) because
+there aren’t as many bogus alerts as in the ATLAS data set I was working with.
+This is in part due to the the real/bogus constraints set by the Fink VRA filter (<code class="docutils literal notranslate"><span class="pre">drb</span> <span class="pre">&gt;</span> <span class="pre">0.5</span></code>)
+and those set by Fink (<code class="docutils literal notranslate"><span class="pre">rb</span> <span class="pre">&gt;</span> <span class="pre">0.55</span></code>).</p>
+<p>I initialised training with data from <strong>the same day</strong> (June 2nd 2025).
+The idea is to mimick training a model from scratch every time.</p>
+<p>I used <strong>30 samples for the first batch</strong> - it feels like an easy enough number to eyeball at the start.
+Emille recommended against large batches at first because in the early days the model is <cite>very</cite> bad
+and it’s essentially random sampling.
+But the first batch being larger has the advantage of the model not being completely useless from the
+get-go (in my ATLAS tests, the models trained with 3 or 5 at a time crawled at the start - I think I
+wouldn’t go lower than 10. I picked 30 to kick start it, but <strong>it is worth investigating these strategies</strong>.</p>
+<p>I used the <code class="docutils literal notranslate"><span class="pre">gal_model_AL_loop.py</span></code> script to run the subsequent loops,
+although there is a jupyter notebook, it was mostly for developement.
+I ran four additional rounds of training with each step <strong>adding 10 new samples</strong>,
+using the uncertainty sampling method.</p>
+<p>For this first test I only recorded accuracy as a metric, but we
+can see how the models improve with each round.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p># Labeled Samples</p></th>
+<th class="head"><p>Accuracy Score</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>30</p></td>
+<td><p>0.63</p></td>
+</tr>
+<tr class="row-odd"><td><p>40</p></td>
+<td><p>0.75</p></td>
+</tr>
+<tr class="row-even"><td><p>50</p></td>
+<td><p>0.88</p></td>
+</tr>
+<tr class="row-odd"><td><p>60</p></td>
+<td><p>0.87</p></td>
+</tr>
+<tr class="row-even"><td><p>70</p></td>
+<td><p>0.93</p></td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
 
 </main>
                         <nav aria-label="Page navigation" class="py-4 my-5 clearfix font-weight-bold border-top">
     <a class="float-left" href="al_atlas.html" title="Previous">
-        <span aria-hidden="true">←&nbsp;</span>1. Active Learning preliminary tests with ATLAS data
+        <span aria-hidden="true">←&nbsp;</span>AL with static ATLAS data
     </a>
 </nav>
                     </div>
@@ -149,8 +319,9 @@ show:</p>
                         <div class="sticky-top toc page-toc" aria-labelledby="page-toc-heading">
                             <p class="font-weight-bold" id="page-toc-heading">Page contents</p>
                             <ul>
-<li><a class="reference internal" href="#">2. First AL training loops on Fink ZTF stream</a><ul>
-<li><a class="reference internal" href="#the-features">2.1 The features</a></li>
+<li><a class="reference internal" href="#">Fink stream prototypes</a><ul>
+<li><a class="reference internal" href="#the-features">The features</a></li>
+<li><a class="reference internal" href="#the-first-al-loop">The “first” AL loop</a></li>
 </ul>
 </li>
 </ul>
@@ -201,16 +372,7 @@ show:</p>
                     &copy; Copyright 2025, Heloise F. Stevance
             </div>
             <div class="text-center text-white-50 font-italic mt-3">
-                <small>
-                    Created using
-                    <a class="text-white" href="https://github.com/wagtail/sphinx_wagtail_theme" rel="nofollow" target="_blank">
-                        Sphinx Wagtail Theme 6.5.0
-                    </a>
-                    and
-                    <a class="text-white" href="https://www.sphinx-doc.org/" rel="nofollow" target="_blank">
-                        Sphinx 8.2.3
-                    </a>
-                </small>
+                <small>Last updated: Jun 04, 2025</small>
             </div>
         </div>
     </div>

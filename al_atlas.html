@@ -6,15 +6,15 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-        <title>1. Active Learning preliminary tests with ATLAS data &mdash; My Project dev documentation</title>
+        <title>AL with static ATLAS data &mdash; Fink VRA dev documentation</title>
     
     <link rel="stylesheet" type="text/css" href="_static/dist/fontawesome.css" />
       <link rel="stylesheet" type="text/css" href="_static/dist/theme.css?v=310cf088" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
             <link rel="index" title="Index" href="genindex.html" />
             <link rel="search" title="Search" href="search.html" />
-            <link rel="top" title="My Project dev documentation" href="#" />
-            <link rel="next" title="2. First AL training loops on Fink ZTF stream" href="al_firstloops.html" />
+            <link rel="top" title="Fink VRA dev documentation" href="#" />
+            <link rel="next" title="Fink stream prototypes" href="al_firstloops.html" />
             <link rel="prev" title="Workflows and pipelines" href="workflow.html" />
     </head>
 <body>
@@ -23,16 +23,30 @@
         <a class="btn btn-sm btn-light skip-to-content-link" href="#main">Skip to content</a>
         <div class="container-fluid">
             <div class="navbar navbar-expand-lg navbar-dark font-weight-bold">
-                    <a href="index.html"
-                        title="Wagtail"
+                    <a href="/"
+                        title="VRA"
                         class="logo navbar-brand"
                     >
-                        <img src="_static/img/logo.png" width="75" height="79" alt="Wagtail"
+                        <img src="_static/img/logo.png" width="75" height="79" alt="VRA"
                             class="logo-img"
                         />
                         Fink VRA
                     </a>
                 
+                
+                    <div class="collapse navbar-collapse justify-content-end">
+                        <ul class="navbar-nav">
+                            
+                                
+                                
+                                <li class="nav-item"><a class="nav-link"  href=" hfstevance@gmail.com ">email </a></li>
+                            
+                                
+                                
+                                <li class="nav-item"><a class="nav-link"  href=" https://www.hfstevance.com/"> hfstevance.com </a></li>
+                            
+                        </ul>
+                    </div>
                 
                 <button class="navbar-toggler btn btn-primary d-lg-none" type="button" data-toggle="collapse" data-target="#collapseSidebar" aria-expanded="false" aria-controls="collapseExample">
                     <span class="navbar-toggler-icon"></span>
@@ -60,14 +74,13 @@
     <nav class="toc mt-3" aria-label="Main menu">
         <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="todo.html">Living to-do &amp; dev notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflows and pipelines</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Active Learning</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Active Learning preliminary tests with ATLAS data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="al_firstloops.html">2. First AL training loops on Fink ZTF stream</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AL with static ATLAS data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="al_firstloops.html">Fink stream prototypes</a></li>
 </ul>
 
     </nav>
@@ -88,7 +101,7 @@
                         <nav aria-label="breadcrumb">
     <ol class="breadcrumb m-0 p-0 bg-transparent">
         <li class="breadcrumb-item"><a href="index.html">Docs</a></li>
-        <li class="breadcrumb-item active" aria-current="page">1. Active Learning preliminary tests with ATLAS data</li>
+        <li class="breadcrumb-item active" aria-current="page">AL with static ATLAS data</li>
     </ol>
 </nav>
                     </div>
@@ -100,7 +113,7 @@
                             <span class="dark-only"><i class="fas fa-sun"></i> Light mode</span>
                             <span class="light-only"><i class="fas fa-moon"></i> Dark mode</span>
                         </button>
-    <a class="btn btn-sm btn-light text-decoration-none" href="https://github.com/wagtail/sphinx_wagtail_theme/blob/main/docs/al_atlas.rst" rel="nofollow">
+    <a class="btn btn-sm btn-light text-decoration-none" href="https://github.com/HeloiseS/finkvra/docs/al_atlas.rst" rel="nofollow">
         <span class="btn-icon"><span class="fab fa-github"></span></span>
         <span class="btn-text">Edit on GitHub</span>
     </a>
@@ -119,8 +132,9 @@
                 <div class="row">
                     <div class="col-12 col-lg-9 order-last order-lg-first rst-content">
                         <main role="main" id="main">
-    <section id="active-learning-preliminary-tests-with-atlas-data">
-<h1>1. Active Learning preliminary tests with ATLAS data<a class="headerlink" href="#active-learning-preliminary-tests-with-atlas-data" title="Link to this heading">¶</a></h1>
+    <section id="al-with-static-atlas-data">
+<h1>AL with static ATLAS data<a class="headerlink" href="#al-with-static-atlas-data" title="Link to this heading">¶</a></h1>
+<p>Active Learning preliminary tests with ATLAS data</p>
 </section>
 
 </main>
@@ -129,7 +143,7 @@
         <span aria-hidden="true">←&nbsp;</span>Workflows and pipelines
     </a>
     <a class="float-right" href="al_firstloops.html" title="Next">
-        2. First AL training loops on Fink ZTF stream <span aria-hidden="true">&nbsp;→</span>
+        Fink stream prototypes <span aria-hidden="true">&nbsp;→</span>
     </a>
 </nav>
                     </div>
@@ -177,16 +191,7 @@
                     &copy; Copyright 2025, Heloise F. Stevance
             </div>
             <div class="text-center text-white-50 font-italic mt-3">
-                <small>
-                    Created using
-                    <a class="text-white" href="https://github.com/wagtail/sphinx_wagtail_theme" rel="nofollow" target="_blank">
-                        Sphinx Wagtail Theme 6.5.0
-                    </a>
-                    and
-                    <a class="text-white" href="https://www.sphinx-doc.org/" rel="nofollow" target="_blank">
-                        Sphinx 8.2.3
-                    </a>
-                </small>
+                <small>Last updated: Jun 04, 2025</small>
             </div>
         </div>
     </div>

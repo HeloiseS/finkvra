@@ -10,7 +10,6 @@ Fink VRA Science and Design Notes
    :maxdepth: 2
    :caption: Overview
 
-   todo
    introduction
    workflow
 
