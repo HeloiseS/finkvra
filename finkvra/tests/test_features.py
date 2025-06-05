@@ -2,6 +2,9 @@ import pandas as pd
 import numpy as np
 import pytest
 from finkvra.utils import features
+from dustmaps.config import config
+
+config.reset()
 
 @pytest.fixture
 def dummy_clean_data():
