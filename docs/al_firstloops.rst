@@ -110,6 +110,10 @@ although there is a jupyter notebook, it was mostly for developement.
 I ran four additional rounds of training with each step **adding 10 new samples**,
 using the uncertainty sampling method.
 
+.. error:: 
+
+    [2025-06-04] I didn't rank by the uncertainty sampling score so I was sampling by order of arrival (essentially randomly). Not a big deal as this is development but worth keeping in mind if you compare these numbers later on. 
+
 For this first test I only recorded accuracy as a metric, but we 
 can see how the models improve with each round. 
 
