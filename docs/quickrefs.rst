@@ -1,4 +1,4 @@
-|:telephone_receiver:| Speed Dial
+Speed Dial
 ====================================
 
 Cheat sheet and useful links
