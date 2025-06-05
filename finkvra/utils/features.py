@@ -2,6 +2,10 @@
 import pandas as pd
 import logging
 import numpy as np
+from astropy.coordinates import SkyCoord
+from dustmaps.sfd import SFDQuery
+
+SFD = SFDQuery()
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, 
@@ -15,6 +19,29 @@ fink_lc_features_to_keep = ['amplitude',
                        'linear_fit_slope_sigma', 
                        'median', 
                        'median_absolute_deviation']
+
+def get_ebv(ra, dec, sfd=SFD):
+    """Function to grab the E(B-V) value from the SFD dust map.
+    This can also used to compute the extinction for a bunch of rows
+    using the .apply function of pandas dataframes
+
+    Parameters:
+        ra (float): Right Ascension in degrees.
+        dec (float): Declination in degrees.
+    Returns:
+        ebv (float): E(B-V) value at the given coordinates.
+    
+    Example:
+        >>> get_ebv(10.684, 41.269) # if you have just Ra and Dec
+        >>> X.apply(lambda row: get_ebv(row.ra, row.dec), axis=1) # If you have a DataFrame
+    """
+    # Create a SkyCoord object from the RA and Dec values
+    coord = SkyCoord(ra=ra, dec=dec, unit='deg', frame='icrs')
+    
+    # Query the SFD dust map for E(B-V) at the given coordinates
+    ebv = sfd(coord)
+    
+    return ebv
 
 def vra_lc_features(row):
     """Function to compute light curve features on each row of a dataframe.
@@ -104,8 +131,11 @@ def make_features(clean_data: pd.DataFrame,
     # We use candid as a in index because it is UNIQUE
     X.set_index('candid', inplace=True)
 
-    # Finally we separate the features and the object names
+    # Then we separate the features and the object names
     meta = X[['objectId']]
     X = X.drop(['objectId'], axis=1)
+
+    # Finally we compute the E(B-V) value for each alert
+    X['ebv'] = X.apply(lambda row: get_ebv(row.ra, row.dec), axis=1)
 
     return X, meta

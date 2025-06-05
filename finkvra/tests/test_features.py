@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 import pytest
 from finkvra.utils import features
+import dustmaps.sfd
+dustmaps.sfd.fetch()
 
 @pytest.fixture
 def dummy_clean_data():
@@ -28,6 +30,11 @@ def dummy_clean_data():
         }] * 3
     })
 
+def test_get_ebv(ra=180.0, dec=45.0):
+    """Test the get_ebv function with fixed RA and Dec."""
+    ebv = features.get_ebv(ra, dec)
+    assert np.isclose(ebv, 0.01418992, atol=1e-5), "E(B-V) value does not match expected value."
+
 def test_vra_lc_features_counts(dummy_clean_data):
     ndets, nnondets, median, std = features.vra_lc_features(dummy_clean_data.iloc[0])
     assert ndets == 1
@@ -43,3 +50,4 @@ def test_make_features_shapes(dummy_clean_data):
     assert 'ra' in X.columns
     assert 'amplitude' in X.columns
     assert 'amplituder_' in X.columns  # r-band
+    assert 'ebv' in X.columns  # E(B-V) feature
