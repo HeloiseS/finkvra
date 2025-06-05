@@ -253,16 +253,16 @@ The current list is as follows | <a class="reference external" href="https://git
 <td></td>
 <td><p>Fink</p></td>
 </tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ebv</span></code></p></td>
+<td><p>E(B-V) extinction value</p></td>
+<td><p>Me</p></td>
+</tr>
 </tbody>
 </table>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Amplitude probs mostly about periodic LC but maybe useful for us?
 Will have to do <strong>permutation importance</strong> to see what’s useful and what isn’t</p>
-</div>
-<div class="admonition attention">
-<p class="admonition-title">Attention</p>
-<p>I really should add E(B-V) to the features!</p>
 </div>
 </section>
 <section id="the-first-al-loop">
@@ -311,8 +311,12 @@ can see how the models improve with each round.</p>
 </tr>
 </tbody>
 </table>
-<div class="admonition-next-steps admonition">
-<p class="admonition-title">Next Steps</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This was before I added E(B-V) as a feature.</p>
+</div>
+<div class="admonition-next-steps-2025-06-04 admonition">
+<p class="admonition-title">Next Steps (2025-06-04)</p>
 <ul class="simple">
 <li><p>Add more metrics to the ML Flow logging, like precision, recall, F1 score, etc.</p></li>
 <li><p>Add a permutation importance plot to the ML Flow dashboard (and save to csv if possible)</p></li>
