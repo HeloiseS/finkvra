@@ -74,7 +74,8 @@ The current list is as follows | `[Fink features ref] <https://github.com/astrol
 +--------------------------------+----------------------------------------+--------------+
 | ``median_absolute_deviationr_``|                                        | Fink         |
 +--------------------------------+----------------------------------------+--------------+
-
+| ``ebv``                        | E(B-V) extinction value                | Me           |
++--------------------------------+----------------------------------------+--------------+ 
 
 .. important::
 
@@ -82,14 +83,10 @@ The current list is as follows | `[Fink features ref] <https://github.com/astrol
     Will have to do **permutation importance** to see what's useful and what isn't
 
 
-.. attention::
-
-    I really should add E(B-V) to the features!
-
-
 
 The "first" AL loop
 ----------------------
+
 Because of development and extensive debugging I ran many "first" loops but 
 now I think I can call it done. Here's what I've got.
 
@@ -130,7 +127,11 @@ can see how the models improve with each round.
 | 70                  | 0.93             |
 +---------------------+------------------+
 
-.. admonition:: Next Steps
+.. note::
+
+    This was before I added E(B-V) as a feature. 
+
+.. admonition:: Next Steps (2025-06-04)
 
     * Add more metrics to the ML Flow logging, like precision, recall, F1 score, etc.
     * Add a permutation importance plot to the ML Flow dashboard (and save to csv if possible)
