@@ -20,6 +20,7 @@ dependencies = [
     "tqdm",
     "fink_client",
     "lasair",
+    "dustmaps",
 ]
 requires-python = ">=3.9"
 
