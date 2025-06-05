@@ -70,7 +70,7 @@
     <nav class="toc mt-3" aria-label="Main menu">
         <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="quickrefs.html">Speed Dial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="speeddial.html">Speed Dial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflows and pipelines</a></li>
 </ul>
@@ -285,6 +285,10 @@ wouldn’t go lower than 10. I picked 30 to kick start it, but <strong>it is wor
 although there is a jupyter notebook, it was mostly for developement.
 I ran four additional rounds of training with each step <strong>adding 10 new samples</strong>,
 using the uncertainty sampling method.</p>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>[2025-06-04] I didn’t rank by the uncertainty sampling score so I was sampling by order of arrival (essentially randomly). Not a big deal as this is development but worth keeping in mind if you compare these numbers later on.</p>
+</div>
 <p>For this first test I only recorded accuracy as a metric, but we
 can see how the models improve with each round.</p>
 <table class="docutils align-default">
