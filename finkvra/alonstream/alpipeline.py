@@ -3,17 +3,10 @@ import pandas as pd
 import numpy as np
 import mlflow
 import mlflow.sklearn
-from sklearn.ensemble import HistGradientBoostingClassifier
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-from mlflow.models.signature import infer_signature
-from datetime import datetime
 import os
 from finkvra.utils.features import make_features as fvra_make_features
-from finkvra.utils.labels import cli_label_one_object as fvra_cli_label_one_object
-import json
 from mlflow.tracking import MlflowClient
 import logging
-from mlflow.models.signature import infer_signature
 import yaml
 
 logger = logging.getLogger(__name__)
@@ -80,7 +73,7 @@ class ALPipeline(object):
         logger.info(f"Settings loaded from {configfile}")
 
         self.__mlflow_setup()  # Setup MLflow tracking server
-        logger.info(f"ML Flow set-up complete.")
+        logger.info("ML Flow set-up complete.")
 
         self.__load_parquet()
 
@@ -157,8 +150,6 @@ class ALPipeline(object):
             max_results=1,
         )
 
-        mlflow_uri = mlflow.get_tracking_uri()
-
         if not runs:
             self.CURRENT_ROUND = 0
             if self.BATCH_SIZE is None:
@@ -171,14 +162,14 @@ class ALPipeline(object):
             logger.info(f"Found Successful run - ID: {self.prev_run_id}. Batch size is {BATCH_SIZE}")
             
             
-            logger.info(f"Loading artifacts from previous run: Previous training IDs")
+            logger.info("Loading artifacts from previous run: Previous training IDs")
             previous_ids_path = self.client.download_artifacts(self.prev_run_id,
                                                                self.training_ids_artifact_path)
             previous_ids_df = pd.read_csv(previous_ids_path)
             self.CURRENT_ROUND= previous_ids_df.iloc[-1]['round'] + 1
             logger.info(f"Previous trainings IDs found - CURRENT ROUND: {self.CURRENT_ROUND}")
                         
-            logger.info(f"Loading artifacts from previous run: Model")
+            logger.info("Loading artifacts from previous run: Model")
             model_uri = f"runs:/{self.prev_run_id}/{self.model_subpath}"
             self.clf = mlflow.sklearn.load_model(model_uri)
     
