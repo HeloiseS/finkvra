@@ -21,6 +21,7 @@ dependencies = [
     "fink_client",
     "lasair",
     "dustmaps",
+    "mlflow",
 ]
 requires-python = ">=3.9"
 
