@@ -1,0 +1,18 @@
+EXPERIMENT: teeeeest                                                            
+SAMPLING_STRATEGY: uncertainty                                                  
+HOST: 127.0.0.1                                                                 
+PORT: "6969"                                                                    
+                                                                                
+PARQUET_GLOB_PATH: /home/stevance/Data/FinkZTFStream/*.parquet                  
+                                                                                
+MODEL_TYPE: gal                                                                 
+LABELS_PATH: /home/stevance/Data/FinkZTFStream/labeled.csv                      
+OUTPUT_ROOT: /home/stevance/Science/fink-vra-notebooks/test_outputs/            
+                                                                                
+N_batch_0: 30                                                                   
+N_batch_i: 5                                                                    
+                                                                                
+PARAMS:                                                                         
+  l2_regularization: 10                                                         
+  learning_rate: 0.1                                                            
+  random_state: 42   

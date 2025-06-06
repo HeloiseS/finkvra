@@ -15,7 +15,7 @@ Fink VRA - Research Notes
    :maxdepth: 3
    :caption: Overview
 
-   quickrefs
+   speeddial
    introduction
    workflow
 

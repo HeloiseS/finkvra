@@ -20,6 +20,17 @@ Purging an ML Flow experiment (run in the same directory where you run the serve
     mlflow gc --backend-store-uri ./mlruns
 
 
+|:ringed_planet:| Jupyter Notebook 
+++++++++++++++++++++++++++++++++++++++++
+
+Reload the modules automatically when I do local changes
+
+.. code-block:: bash
+
+    %load_ext autoreload
+    %autoreload 2
+
+
 |:link:| 
 -----------------
 
