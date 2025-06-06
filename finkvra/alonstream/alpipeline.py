@@ -3,8 +3,14 @@ import pandas as pd
 import numpy as np
 import mlflow
 import mlflow.sklearn
+from sklearn.ensemble import HistGradientBoostingClassifier
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from mlflow.models.signature import infer_signature
+from datetime import datetime
 import os
 from finkvra.utils.features import make_features as fvra_make_features
+from finkvra.utils.labels import cli_label_one_object as fvra_cli_label_one_object
+import json
 from mlflow.tracking import MlflowClient
 import logging
 import yaml
@@ -12,6 +18,9 @@ import yaml
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.WARNING, 
                     format="%(asctime)s [%(levelname)s] %(name)s.%(funcName)s: %(message)s")
+
+def uncertainty_sampling_score(prediction):
+    return np.abs(prediction.astype(float) - 0.5) 
 
 
 class ALPipeline(object):
@@ -81,6 +90,89 @@ class ALPipeline(object):
         logger.info(f"Features made for {self.X.shape[0]} samples (unique candid) - {self.meta.objectId.unique().shape[0]} unique objects")
 
         ### NOW GONNA HAVE TO ADD LOGIC FOR WHEN ROUND IS AND ISN'T 0 
+        if self.CURRENT_ROUND == 0:
+            # could scramble them if you wanted more randomness
+            self.candid_loop = self.X.index.astype(np.int64)
+
+        elif self.CURRENT_ROUND > 0:
+            self.__candid_loop() 
+
+        # Now that we have candid_loop can do the labeling. 
+        self.new_ids_df, self.updated_labels = self.__labeling()
+
+        if self.CURRENT_ROUND > 0:
+            self.train_ids_df = pd.concat([self.previous_ids_df, 
+                                           self.new_ids_df]).reset_index(drop=True)
+        else:
+            train_ids_df = self.new_ids_df
+            
+        train_ids_df.to_csv(self.training_ids_path, index=False)
+        logging.info(f'Saved training ids locally to {self.training_ids_path}')
+        
+        self.y_train = self.updated_labels.loc[train_ids_df.candid].label.map(self.label2class[self.MODEL_TYPE])
+        self.X_train = self.X.loc[train_ids_df.candid]
+
+        self.y_train.to_csv(f"{self.OUTPUT_ROOT}{self.EXPERIMENT}/y_train.csv")
+        self.X_train.to_csv(f"{self.OUTPUT_ROOT}{self.EXPERIMENT}/X_train.csv")
+
+        logger.info(f"Made y_train and X_train and saved to {self.OUTPUT_ROOT}{self.EXPERIMENT}")
+
+
+        # -------------------
+        # TRAIN
+        # -------------------
+
+        MODEL_TAG = f"{self.model_subpath}_round_{self.CURRENT_ROUND}"
+
+        with mlflow.start_run(run_name=f"round_{self.CURRENT_ROUND}_{self.SAMPLING_STRATEGY}"):
+
+            # Log metadata
+            meta_info = {
+                "round": int(self.CURRENT_ROUND),
+                "timestamp": datetime.utcnow().isoformat(),
+                "n_train": int(self.X_train.shape[0]),
+                "sampling_strategy": str(self.SAMPLING_STRATEGY),
+                "model_tag": str(MODEL_TAG)
+            }
+
+            with open("meta.json", "w") as f:
+                json.dump(meta_info, f, indent=2)
+            mlflow.log_artifact("meta.json")
+
+            # Train model
+            mlflow.log_params(self.PARAMS)
+            clf_new = HistGradientBoostingClassifier(**self.PARAMS)
+            clf_new.fit(self.X_train.values, self.y_train.values)
+            y_pred_new = clf_new.predict(self.X_train.values)
+
+            # Evaluate on training set
+            acc = accuracy_score(self.y_train, y_pred_new)
+            mlflow.log_metric("accuracy", acc)
+            
+            prec = precision_score(self.y_train, y_pred_new)
+            mlflow.log_metric("precision", prec)
+            
+            recall = recall_score(self.y_train, y_pred_new)
+            mlflow.log_metric("recall", recall)
+            
+            f1 = f1_score(self.y_train, y_pred_new)
+            mlflow.log_metric("f1-score", f1)
+
+            # Log model
+            signature = infer_signature(self.X_train, y_pred_new)
+            mlflow.sklearn.log_model(
+                clf_new,
+                artifact_path=self.model_subpath,
+                signature=signature,
+                input_example=self.X_train.iloc[:2]
+            )
+
+            # Save training state
+            mlflow.log_artifact(self.training_ids_path)
+            mlflow.log_artifact(f"{self.OUTPUT_ROOT}{self.EXPERIMENT}/y_train.csv")
+            mlflow.log_artifact(f"{self.OUTPUT_ROOT}{self.EXPERIMENT}/X_train.csv")
+
+
 
     def _read_config(self, configfile: str) -> dict:
         """Read the configuration file."""
@@ -193,3 +285,91 @@ class ALPipeline(object):
         valid_candid = list(X[X.ndets > 0].index.values)
         self.X = X.loc[valid_candid]
         self.meta = meta.loc[valid_candid]
+
+   
+    def __candid_loop(self):
+
+        # First we have to define the pool of samples we can sample from
+        # that is those we haven't trained on yet.
+        self.train_ids = self.previous_ids_df["candid"].tolist()
+        self.X_pool = self.X.drop(index=self.train_ids, 
+                                  errors='ignore')
+        
+        self.meta_pool = self.meta.drop(index=self.train_ids, 
+                                        errors='ignore')
+        logger.info(f"Training pool contains {self.X_pool.shape[0]} samples ({self.meta_pool.objectId.unique().shape[0]} unique)")
+        
+        logger.info("Predicting class for training pool using previous model")
+        self.y_pred = self.clf.predict_proba(self.X_pool)[:, 1]  
+        self.y_pred_pool = pd.DataFrame(np.vstack((self.X_pool.index.values.astype(str), 
+                                                    self.y_pred)).T, columns= ['candid', 
+                                                                               'pred']).set_index('candid')
+        
+        ### here need a function that gives back sampling score: low is "good" (we want)
+        self.y_pred_pool['sampling_score'] = self.y_pred_pool.apply(lambda row: uncertainty_sampling_score(row['pred']), axis=1)
+        self.y_pred_pool.sort_values('sampling_score', ascending=True, inplace=True)
+        self.candid_loop = self.y_pred_pool.index.astype(np.int64)
+
+
+
+    def __labeling(self):
+        new_labels = []
+        new_label_candid = []
+        new_sample_candid = []
+
+        N_i = 0
+
+        for _candid in self.candid_loop:
+            try: 
+                try:
+                    classification = self.label2galclass[self.labels.loc[_candid].label]
+                except TypeError:
+                    logging.error(f"Shit! You got duplicate labels in {self.LABELS_PATH}")
+                    logging.error(_candid)
+                    exit()
+                if not np.isnan(classification):
+                    new_sample_candid.append(_candid)
+                    N_i += 1
+            except KeyError: 
+                # if _candid not in labels then labels.loc[_candid] will throw a KeyError 
+                # and we can activate the logic below
+                _objectId = self.meta.loc[_candid].objectId
+                
+                # this is where we need the labeling 
+                label = fvra_cli_label_one_object(_objectId)
+                
+                if label is None: 
+                    continue
+                new_labels.append(label)
+                new_label_candid.append(_candid)
+                classification = self.label2galclass[label]
+                if not np.isnan(classification):
+                    new_sample_candid.append(_candid)
+                    N_i += 1
+                
+            if N_i == self.BATCH_SIZE:
+                logging.info(f'Batch size ({self.BATCH_SIZE}) reached.')
+                break
+
+        if N_i < self.BATCH_SIZE:
+            logging.warning(f'Batch size ({self.BATCH_SIZE}) not reached: {N_i}')       
+
+        # ----------------------------------------------------
+        # Record (or update) labels
+        # ----------------------------------------------------
+        timestamp = datetime.utcnow().isoformat()
+        new_labels_df = pd.DataFrame.from_dict({
+                                                'objectId': self.meta.loc[np.array(new_label_candid
+                                                                                   ).astype(np.int64)].objectId,
+                                                'label':  new_labels,
+                                                'timestamp': timestamp
+                                            })
+        updated_labels = pd.concat((self.labels, 
+                                    new_labels_df))
+        updated_labels.to_csv(self.LABELS_PATH)
+        logging.info(f"Updated the labels at: {self.LABELS_PATH}")
+
+        new_ids_df = pd.DataFrame({'candid': np.array(new_sample_candid).astype(np.int64),
+                                'round': self.CURRENT_ROUND,
+                                })
+        return new_ids_df, updated_labels
