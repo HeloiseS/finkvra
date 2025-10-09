@@ -139,3 +139,4 @@ def make_features(clean_data: pd.DataFrame,
     X['ebv'] = X.apply(lambda row: get_ebv(row.ra, row.dec), axis=1)
 
     return X, meta
+

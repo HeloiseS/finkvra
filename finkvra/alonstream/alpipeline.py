@@ -14,19 +14,53 @@ import json
 from mlflow.tracking import MlflowClient
 import logging
 import yaml
+from finkvra.utils.env_utils import generate_conda_yaml_from_imports
+
+PKG_DIR="/home/stevance/software/finkvra/finkvra/utils/"
+yaml_path = generate_conda_yaml_from_imports(PKG_DIR, 
+                                             "/tmp/conda_from_imports.yaml", 
+                                             include_self=False, 
+                                             extra_pip=["mlflow"])
+
+
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.WARNING, 
-                    format="%(asctime)s [%(levelname)s] %(name)s.%(funcName)s: %(message)s")
+                    format="%(asctime)s [%(levelname)s] %(name)s.%(funcName)s: %(message)s"
+                    )
 
 def uncertainty_sampling_score(prediction):
-    return np.abs(prediction.astype(float) - 0.5) 
+    return np.abs(float(prediction) - 0.5) 
 
 
 class ALPipeline(object):
     """Active Learning Pipeline to Run Experiments on the Fink ZTF Stream."""
 
     # Class attributes
+    ##### 
+    # CV class and XgT (Xtragal transient)
+    # are slightly different, aimed at one type of thing and 
+    # I decided to make bogus 0 not nan but should review 
+    label2CVclass = {'real': np.nan,
+                    'extragal': 0,
+                    'gal': 1,
+                    'agn': 0,
+                    'bogus': 0,
+                    'varstar': 0,
+                    None: np.nan,
+                    np.nan: np.nan,
+                    }
+    
+    label2XgTclass = {'real': np.nan,
+                    'extragal': 1,
+                    'gal': 0,
+                    'agn': 0,
+                    'bogus': 0,
+                    'varstar': 0,
+                    None: np.nan,
+                    np.nan: np.nan,
+                    }
+    #####
 
     label2galclass = {'real': np.nan,
                   'extragal': 0,
@@ -57,10 +91,13 @@ class ALPipeline(object):
                     None: np.nan,
                     np.nan: np.nan,
                     }
+    
 
     label2class = {'gal': label2galclass,
                 'real': label2realclass,
-                'trans': label2transclass
+                'trans': label2transclass,
+                'cv': label2CVclass,
+                'XgT': label2XgTclass
                 }
     
     def __init__(self, 
@@ -104,13 +141,13 @@ class ALPipeline(object):
             self.train_ids_df = pd.concat([self.previous_ids_df, 
                                            self.new_ids_df]).reset_index(drop=True)
         else:
-            train_ids_df = self.new_ids_df
+            self.train_ids_df = self.new_ids_df
             
-        train_ids_df.to_csv(self.training_ids_path, index=False)
+        self.train_ids_df.to_csv(self.training_ids_path, index=False)
         logging.info(f'Saved training ids locally to {self.training_ids_path}')
         
-        self.y_train = self.updated_labels.loc[train_ids_df.candid].label.map(self.label2class[self.MODEL_TYPE])
-        self.X_train = self.X.loc[train_ids_df.candid]
+        self.y_train = self.updated_labels.loc[self.train_ids_df.candid].label.map(self.LABEL2CLASS)
+        self.X_train = self.X.loc[self.train_ids_df.candid]
 
         self.y_train.to_csv(f"{self.OUTPUT_ROOT}{self.EXPERIMENT}/y_train.csv")
         self.X_train.to_csv(f"{self.OUTPUT_ROOT}{self.EXPERIMENT}/X_train.csv")
@@ -162,12 +199,19 @@ class ALPipeline(object):
             signature = infer_signature(self.X_train, y_pred_new)
             mlflow.sklearn.log_model(
                 clf_new,
-                artifact_path=self.model_subpath,
+                name=self.model_subpath,
+                #artifact_path=self.model_subpath, #deprecated
                 signature=signature,
-                input_example=self.X_train.iloc[:2]
-            )
+                #code_paths=[PKG_DIR],
+                input_example=self.X_train.iloc[:2],
+                conda_env=yaml_path
+                )
+            
+            #mlflow.log_artifact(yaml_path, 
+            #                    artifact_path="env")
 
             # Save training state
+            mlflow.log_artifacts(PKG_DIR, artifact_path="code")
             mlflow.log_artifact(self.training_ids_path)
             mlflow.log_artifact(f"{self.OUTPUT_ROOT}{self.EXPERIMENT}/y_train.csv")
             mlflow.log_artifact(f"{self.OUTPUT_ROOT}{self.EXPERIMENT}/X_train.csv")
@@ -191,11 +235,13 @@ class ALPipeline(object):
             self.PARQUET_GLOB_PATH = self.parquet_glob_path
             logger.info(f"Using custom parquet glob path: {self.PARQUET_GLOB_PATH}")
 
-
-        self.MODEL_TYPE = self.config['MODEL_TYPE']
-        if self.MODEL_TYPE not in ['gal', 'real', 'trans']:
-            raise ValueError(f"MODEL_TYPE must be one of ['gal', 'real', 'trans'], got {self.MODEL_TYPE} instead.")
         
+        self.MODEL_TYPE = self.config['MODEL_TYPE']
+        if self.MODEL_TYPE not in self.label2class.keys():
+            raise ValueError(f"MODEL_TYPE must be one of {self.label2class.keys()}, got {self.MODEL_TYPE} instead.")
+        
+        self.LABEL2CLASS = self.label2class[self.MODEL_TYPE]
+
         self.LABELS_PATH = self.config['LABELS_PATH']
         self.OUTPUT_ROOT = self.config['OUTPUT_ROOT']
 
@@ -206,6 +252,7 @@ class ALPipeline(object):
             logger.info(f"Using custom batch size: {self.BATCH_SIZE}")
         else:
             self.BATCH_SIZE = None
+
 
         self.PARAMS = self.config['PARAMS']
 
@@ -250,15 +297,15 @@ class ALPipeline(object):
         else:
             last_run = runs[0]
             self.prev_run_id = last_run.info.run_id
-            BATCH_SIZE = self.config['N_batch_i']
-            logger.info(f"Found Successful run - ID: {self.prev_run_id}. Batch size is {BATCH_SIZE}")
+            self.BATCH_SIZE = self.config['N_batch_i']
+            logger.info(f"Found Successful run - ID: {self.prev_run_id}. Batch size is {self.BATCH_SIZE}")
             
             
             logger.info("Loading artifacts from previous run: Previous training IDs")
             previous_ids_path = self.client.download_artifacts(self.prev_run_id,
                                                                self.training_ids_artifact_path)
-            previous_ids_df = pd.read_csv(previous_ids_path)
-            self.CURRENT_ROUND= previous_ids_df.iloc[-1]['round'] + 1
+            self.previous_ids_df = pd.read_csv(previous_ids_path)
+            self.CURRENT_ROUND= self.previous_ids_df.iloc[-1]['round'] + 1
             logger.info(f"Previous trainings IDs found - CURRENT ROUND: {self.CURRENT_ROUND}")
                         
             logger.info("Loading artifacts from previous run: Model")
@@ -322,7 +369,7 @@ class ALPipeline(object):
         for _candid in self.candid_loop:
             try: 
                 try:
-                    classification = self.label2galclass[self.labels.loc[_candid].label]
+                    classification = self.LABEL2CLASS[self.labels.loc[_candid].label]
                 except TypeError:
                     logging.error(f"Shit! You got duplicate labels in {self.LABELS_PATH}")
                     logging.error(_candid)
@@ -342,11 +389,11 @@ class ALPipeline(object):
                     continue
                 new_labels.append(label)
                 new_label_candid.append(_candid)
-                classification = self.label2galclass[label]
+                classification = self.LABEL2CLASS[label]
                 if not np.isnan(classification):
                     new_sample_candid.append(_candid)
                     N_i += 1
-                
+                logging.info(f'N labelled = {N_i}  | Aiming for {self.BATCH_SIZE} reached.')
             if N_i == self.BATCH_SIZE:
                 logging.info(f'Batch size ({self.BATCH_SIZE}) reached.')
                 break

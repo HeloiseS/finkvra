@@ -107,7 +107,7 @@ def test_poll_n_alerts_pipeline(mock_process_alerts, mock_run_sherlock, mock_ale
             {'bootstrap.servers': 'localhost:1234', 'group.id': 'test'},
             ['fink_vra_ztf'],
             n=1,
-            outidr='/tmp/'
+            outdir='/tmp/'
         )
         assert mock_consumer_instance.consume.called
         assert mock_process_alerts.called

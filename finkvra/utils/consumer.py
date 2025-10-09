@@ -74,7 +74,7 @@ def run_sherlock(alert_data:pd.DataFrame):
 def poll_n_alerts(myconfig, 
                   topics, 
                   n=10, 
-                  outidr = '~/Data/FinkZTFStream/') -> None:
+                  outdir = '~/Data/FinkZTFStream/') -> None:
     """ Connect to and poll fink servers once.
 
     Parameters
@@ -112,7 +112,7 @@ def poll_n_alerts(myconfig,
         if clean_dat.empty:
             logger.info("No alerts left after filtering.")
         else:
-            outpath = os.path.expanduser(outidr + f'{prefix}_alerts.parquet')
+            outpath = os.path.expanduser(outdir + f'{prefix}_alerts.parquet')
             clean_dat.to_parquet(outpath)
             logger.info(f"Saved {len(clean_dat)} cleaned alerts to {outpath}")
     except Exception as e:

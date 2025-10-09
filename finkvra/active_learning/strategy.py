@@ -24,7 +24,8 @@ def entropy_sampling(model,
     # we need to avoid values too close to 0 or 1 in the probabilities to avoid getting infs
     # np.clip does not CLIP the array itself it clips the VALUES to the boundaries we defined,
     probs = np.clip(probs, 1e-5, 1 - 1e-5)
-    entropy = -y_true.values * np.log2(probs) - (np.abs(y_true.values - probs)) * np.log2(np.abs(y_true.values - probs))
+    entropy = -y_true.values * np.log2(probs) - (1-y_true.values) * np.log2(1 - probs) 
+    # HFS: 2025-09-26: updated to CORRECT formular for binary entropy
 
     return list(pd.Series(entropy, index=X_pool.index).nlargest(batch_size).index)
 
