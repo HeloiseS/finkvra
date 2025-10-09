@@ -213,7 +213,8 @@ can be extra steps involved.</p>
 <p>where <code class="docutils literal notranslate"><span class="pre">y</span></code> is the <strong>true label</strong> and <code class="docutils literal notranslate"><span class="pre">p</span></code> is the <strong>predicted probability</strong>.</p>
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
-<p>I need to double check my maths - something doesn’t look right</p>
+<p>I need to double check my maths - something doesn’t look right
+Note to self - you are right, it was wrong! Correct formula should simply be the bianry cross entropy.</p>
 </div>
 <p>Instead of <strong>sampling our next batch of data</strong> based on our uncertain we are,
 we select based on how far from the “true” label the predictions are.
@@ -300,7 +301,7 @@ This slows down the learning process and could lead to ovefitting (although HGBD
                     &copy; Copyright 2025, Heloise F. Stevance
             </div>
             <div class="text-center text-white-50 font-italic mt-3">
-                <small>Last updated: Jun 06, 2025</small>
+                <small>Last updated: Oct 09, 2025</small>
             </div>
         </div>
     </div>

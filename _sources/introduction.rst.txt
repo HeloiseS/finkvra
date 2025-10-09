@@ -94,6 +94,7 @@ where ``y`` is the **true label** and ``p`` is the **predicted probability**.
 .. danger:: 
 
     I need to double check my maths - something doesn't look right
+    Note to self - you are right, it was wrong! Correct formula should simply be the bianry cross entropy.
 
   
 Instead of **sampling our next batch of data** based on our uncertain we are, 
